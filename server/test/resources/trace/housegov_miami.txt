@@ -1,0 +1,5 @@
+A trace file for:
+    GET http://www.house.gov/representatives/find/
+	GET http://ziplook.house.gov/htbin/findrep?ZIP=33156&Submit=FIND+YOUR+REP+BY+ZIP
+
+One rep returned, so no need for address lookup

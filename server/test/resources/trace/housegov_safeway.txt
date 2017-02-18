@@ -1,0 +1,11 @@
+A trace file for:
+    GET http://www.house.gov/representatives/find/
+	GET http://ziplook.house.gov/htbin/findrep?ZIP=94131&Submit=FIND+YOUR+REP+BY+ZIP
+    POST http://ziplook.house.gov/htbin/findrep?ADDRLK89373111089373111
+        street	5290 diamond heights blvd
+        city	san francisco
+        state	CACalifornia
+        Submit	FIND YOUR REP BY ADDRESS
+        ZIP	94131
+
+Two reps return for this zip code, so we need the address lookup

@@ -1,8 +1,9 @@
-(ns going-postal.test.handler
+(ns going-postal.handler-test
   (:use clojure.test
         ring.mock.request
         going-postal.handler))
 
+(comment
 (deftest test-app
   (testing "main route"
     (let [response (app (request :get "/"))]
@@ -12,3 +13,4 @@
   (testing "not-found route"
     (let [response (app (request :get "/invalid"))]
       (is (= (:status response) 404)))))
+)
