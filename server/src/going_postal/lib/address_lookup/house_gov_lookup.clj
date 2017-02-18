@@ -2,11 +2,10 @@
 
 (ns going-postal.lib.address-lookup.house-gov-lookup
   (:require [going-postal.lib.address-lookup.lookup :refer [Lookup]]
-            [clj-http.client :as http]
+            [going-postal.lib.address-lookup.lookup-util :refer :all]
             [clojure.string :as cstr]
             [clojure.data.csv :as csv]
             [clojure.java.io :as io]
-            [hickory.core :as hick]
             [hickory.select :as s])
   (:import [org.jsoup Jsoup])) ;; Import available through hickory dependency
 
@@ -32,26 +31,6 @@
 (defn lookup-contact [district]
   (-> (filter (comp #{district} cstr/lower-case :115stdis) @contact-records)
       first))
-
-;; Note: this does not properly handle different encodings (for that, we need to use JSoup/parse directly), buuut this should be OK for house.gov I think.
-(defn fetch-html
-  ([url]
-   (println "Fetching from" url)
-   (-> (http/get url)
-       :body
-       hick/parse
-       hick/as-hickory))
-  ([url-fmt & args]
-   (let [url (apply format url-fmt args)]
-     (fetch-html url))))
-
-(defn post-and-parse-html
-  ([url params]
-   (println "Posting to " url "," params)
-   (-> (http/post url {:form-params params})
-       :body
-       hick/parse
-       hick/as-hickory)))
 
 (defn do-extract-form-params [frm]
   (let [frm-attrs (:attrs frm)
@@ -80,20 +59,6 @@
                 first)]
     (conj (vec (do-extract-form-params frm)) page)))
 
-(defn get-attr-value-fn [attr node]
-  (get-in node [:attrs attr]))
-
-(def get-option-value (partial get-attr-value-fn :value))
-
-(def get-a-href (partial get-attr-value-fn :href))
-
-(defn get-content [node]
-  (-> node
-      :content
-      first
-      cstr/trim))
-
-(def get-content-lower-case (comp cstr/lower-case get-content))
 
 (defn format-state [state page]
   (let [state-lwr (cstr/lower-case state)
@@ -138,25 +103,41 @@
             district (get-district-from-image-url img-url)]
         {:name rep-name :image-url img-url :district district :home-page href}))))
 
-(defn add-contact-record [{district :district :as rep-info}]
+
+(defn select-values [map ks]
+  (reduce #(conj %1 (map %2)) [] ks))
+
+(defn make-contact-record [{district :district :as rep-info}]
   (when district
-    (let [contact (lookup-contact district)]
-      (assoc rep-info :contact contact))))
+    (let [contact (lookup-contact district)
+          values (-> contact
+                     (select-values [:prefix :firstname :middlename :lastname :suffix :address :city :state :zip4 :115stdis :bioguideid :party])
+                     (concat (map (partial get rep-info) [:image-url :home-page])))]
+      (println contact)
+      (println values)
+
+      (apply ->ContactRecord :representative values))))
 
 (defn lookup-address [street city state zip]
   (binding [clj-http.core/*cookie-store* (clj-http.cookies/cookie-store)]
-    (let [by-zip-page (->> (fetch-html house-gov-url-start)
-                           extract-by-zip-url
-                           (fetch-by-zip zip))]
-      ;; Try to extract a rep from the zip page...if there are multiple, we need to do a bit more
-      (if-let [rec (extract-rep-info by-zip-page)]
-        (->> rec          ; Exact match on zip code
-             add-contact-record)
-        (->> by-zip-page  ; Multiple possibilities, use full address
-             extract-by-address-url
-             (fetch-by-address street city state zip)
-             extract-rep-info
-             add-contact-record)))))
+    (try
+      (let [by-zip-page (->> (fetch-html house-gov-url-start)
+                             extract-by-zip-url
+                             (fetch-by-zip zip))]
+        ;; Try to extract a rep from the zip page...if there are multiple, we need to do a bit more
+        (if-let [rec (extract-rep-info by-zip-page)]
+          (->> rec          ; Exact match on zip code
+               make-contact-record)
+          (->> by-zip-page  ; Multiple possibilities, use full address
+               extract-by-address-url
+               (fetch-by-address street city state zip)
+               extract-rep-info
+               make-contact-record)))
+      (catch clojure.lang.ExceptionInfo e
+        (let [{status :status} (ex-data e)]
+          (if-not (= 404 status)
+            (throw e)))))))
+
 
 (defn make-house-gov-lookup []
   (reify Lookup

@@ -1,14 +1,16 @@
+;;;; Integration test for house-gov-lookup using clj-http-trace to mock http requests/responses
 (ns going-postal.lib.address-lookup.house-gov-lookup-test
   (:require [clojure.test :refer :all]
             [clj-http-trace.core :refer :all]
             [going-postal.lib.address-lookup.lookup :refer [lookup]]
+            [going-postal.lib.address-lookup.lookup-util :refer [->ContactRecord]]
             [going-postal.lib.address-lookup.house-gov-lookup :refer :all]))
 
 (deftest simple-zip-lookup-test
   (testing "Test parsing and simple get."
     (install-trace-intercept! "trace/housegov_miami.trace")
     (let [undertest (make-house-gov-lookup)
-          expected {:name "Ileana Ros-Lehtinen", :image-url "ziplook.house.gov/zip/pictures/fl27_ros-lehtinen.jpg", :district "fl27", :home-page "http://ros-lehtinen.house.gov/", :contact {:party "R", :suffix "", :zip4 "20515-0927", :address "2206 Rayburn House Office Building", :lastname "Ros-Lehtinen", :115stdis "FL27", :city "Washington", :state "DC", :middlename "", :prefix "The Honorable", :bioguideid "R000435", :firstname "Ileana"}}]
+          expected (->ContactRecord :representative "The Honorable" "Ileana" "" "Ros-Lehtinen" "" "2206 Rayburn House Office Building" "Washington" "DC" "20515-0927" "FL27" "R000435" "R" "ziplook.house.gov/zip/pictures/fl27_ros-lehtinen.jpg" "http://ros-lehtinen.house.gov/")]
       (is (= expected (lookup undertest "9700 sw 67th ave" "miami" "florida" 33156))))))
 
 (deftest invalid-address-lookup-test
@@ -22,5 +24,5 @@
   (testing "Test parsing and lookup with full address (2 possibilities for zip code)."
     (install-trace-intercept! "trace/housegov_safeway.trace")
     (let [undertest (make-house-gov-lookup)
-          expected {:name "Nancy Pelosi", :image-url "ziplook.house.gov/zip/pictures/ca12_pelosi.jpg", :district "ca12", :home-page "http://pelosi.house.gov/", :contact {:party "D", :suffix "", :zip4 "20515-0512", :address "233 Cannon House Office Building", :lastname "Pelosi", :115stdis "CA12", :city "Washington", :state "DC", :middlename "", :prefix "The Honorable", :bioguideid "P000197", :firstname "Nancy"}}]
+          expected (->ContactRecord :representative "The Honorable" "Nancy" "" "Pelosi" "" "233 Cannon House Office Building" "Washington" "DC" "20515-0512" "CA12" "P000197" "D" "ziplook.house.gov/zip/pictures/ca12_pelosi.jpg" "http://pelosi.house.gov/")] 
       (is (= expected (lookup undertest "5290 diamond heights blvd" "san francisco" "california" 94131))))))
