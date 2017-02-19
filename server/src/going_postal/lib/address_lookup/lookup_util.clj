@@ -41,7 +41,3 @@
       cstr/trim))
 
 (def get-content-lower-case (comp cstr/lower-case get-content))
-
-;;; Data methods, to generate consistant structures
-(def RecTypes [:representative :senator])
-(defrecord ContactRecord [rectype prefix firstname middlename lastname suffix address city state zip+4 region bioguide-id party image-url home-page])

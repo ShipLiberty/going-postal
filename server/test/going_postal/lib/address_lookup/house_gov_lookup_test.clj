@@ -2,8 +2,8 @@
 (ns going-postal.lib.address-lookup.house-gov-lookup-test
   (:require [clojure.test :refer :all]
             [clj-http-trace.core :refer :all]
+            [going-postal.models.contact-record :refer [->ContactRecord]]
             [going-postal.lib.address-lookup.lookup :refer [lookup]]
-            [going-postal.lib.address-lookup.lookup-util :refer [->ContactRecord]]
             [going-postal.lib.address-lookup.house-gov-lookup :refer :all]))
 
 (deftest simple-zip-lookup-test

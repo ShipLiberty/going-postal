@@ -3,6 +3,7 @@
 (ns going-postal.lib.address-lookup.house-gov-lookup
   (:require [going-postal.lib.address-lookup.lookup :refer [Lookup]]
             [going-postal.lib.address-lookup.lookup-util :refer :all]
+            [going-postal.models.contact-record :refer :all]
             [clojure.string :as cstr]
             [clojure.data.csv :as csv]
             [clojure.java.io :as io]
