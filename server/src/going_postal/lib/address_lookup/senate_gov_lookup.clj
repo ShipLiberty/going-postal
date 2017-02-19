@@ -7,10 +7,18 @@
             [clojure.string :as cstr]
             [clojure.data.csv :as csv]
             [clojure.java.io :as io]
+            [hickory.core :as hick]
             [hickory.select :as s]))
 
 
 (def senate-gov-url-all "https://www.senate.gov/general/contact_information/senators_cfm.cfm")
+(def senate-gov-resource (io/resource "data/senators_cfm.cfm"))
+
+(defn load-html-from-file []
+  (with-open [r (io/reader senate-gov-resource)]
+    (-> (slurp r)
+       hick/parse
+       hick/as-hickory)))
 
 (defn parser-init []
   [[] {} 0])
@@ -172,7 +180,7 @@
 (defn lookup-by-state [two-letter-state]
   (binding [clj-http.core/*cookie-store* (clj-http.cookies/cookie-store)]
     (try
-      (let [senate-gov-page (fetch-html senate-gov-url-all)
+      (let [senate-gov-page (load-html-from-file) ;(fetch-html senate-gov-url-all)
             records (parse-senate-gov-page senate-gov-page)]
         (filter (comp #{two-letter-state} :region) records))
       (catch clojure.lang.ExceptionInfo e

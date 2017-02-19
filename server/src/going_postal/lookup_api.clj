@@ -16,7 +16,7 @@
   (swap! lookup-handlers conj handler))
 
 (register-lookup-handler! (make-house-gov-lookup))
-; (register-lookup-handler! (make-senate-gov-lookup))
+(register-lookup-handler! (make-senate-gov-lookup))
 
 (defn handle-lookup [{{:keys [address city state zip]} :params :as request}]
   (println "REQ" address city state zip)
