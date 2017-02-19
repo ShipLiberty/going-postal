@@ -4,6 +4,7 @@
   :min-lein-version "2.0.0"
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/data.csv "0.1.3"]
+                 [cheshire "5.7.0"]
                  [compojure "1.1.6"]
                  [hiccup "1.0.5"]
                  [hickory "0.6.0"]
