@@ -18,10 +18,16 @@
 (register-lookup-handler! (make-house-gov-lookup))
 (register-lookup-handler! (make-senate-gov-lookup))
 
+(defn lift-to-vector [x]
+  (if-not (seq? x)
+    (vector x)
+    x))
+
 (defn handle-lookup [{{:keys [address city state zip]} :params :as request}]
   (println "REQ" address city state zip)
   (let [found (->> (map #(lookup % address city state zip) @lookup-handlers)
-       (remove nil?))]
+                   (map lift-to-vector)
+                   (reduce concat []))]
     (if (empty? found)
       {:status 404 :body "Nothing found for this address"}
       (json-response found))))
