@@ -5,6 +5,7 @@
             [hiccup.middleware :refer [wrap-base-url]]
             [compojure.handler :as handler]
             [compojure.route :as route]
+            [ring.middleware.cors :refer [wrap-cors]]
             [going-postal.routes.home :refer [home-routes]]))
 
 (defn init []
@@ -19,5 +20,7 @@
 
 (def app
   (-> (routes home-routes app-routes)
+      (wrap-cors :access-control-allow-origin [#"http://localhost:3000"]
+                 :access-control-allow-methods [:get])
       (handler/site)
       (wrap-base-url)))

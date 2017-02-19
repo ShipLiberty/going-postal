@@ -10,7 +10,8 @@
                  [hickory "0.6.0"]
                  [clj-http "2.0.0"]
                  [clj-datastore "0.3.0-SNAPSHOT"]
-                 [ring-server "0.3.1"]]
+                 [ring-server "0.3.1"]
+                 [ring-cors "0.1.9"]]
   :plugins [[lein-ring "0.8.12"]
             ]
   :ring {:handler going-postal.handler/app
