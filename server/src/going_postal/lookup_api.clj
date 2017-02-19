@@ -1,6 +1,7 @@
 (ns going-postal.lookup-api
   (:require [going-postal.lib.address-lookup.lookup :refer [lookup]]
             [going-postal.lib.address-lookup.house-gov-lookup :refer [make-house-gov-lookup]]
+            [going-postal.lib.address-lookup.senate-gov-lookup :refer [make-senate-gov-lookup]]
             [cheshire.core :as json]))
 
 (defn json-response [data & [status]]
@@ -15,6 +16,7 @@
   (swap! lookup-handlers conj handler))
 
 (register-lookup-handler! (make-house-gov-lookup))
+(register-lookup-handler! (make-senate-gov-lookup))
 
 (defn handle-lookup [{{:keys [address city state zip]} :params :as request}]
   (println "REQ" address city state zip)
