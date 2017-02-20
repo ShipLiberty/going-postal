@@ -1,0 +1,9 @@
+typings
+src/app/**/*.js
+src/app/**/*.map
+node_modules
+jspm_packages
+bower_components
+.DS_Store
+src/*.map
+src/*.js

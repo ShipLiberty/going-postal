@@ -1,0 +1,127 @@
+<div class="ui text container center aligned">
+    <h1 id="headerTitle">Send ACTUAL, REAL PHYSICAL letters to your representatives!</h1>
+    <p>(we charge $1 for postage and all excess will go to a charity of your choice.)</p>
+</div>
+<br>
+<div *ngIf="hidden"> does this show up? guess not</div>
+<!-- ADDRESS FROM -->
+<div class="ui middle aligned center aligned grid">
+    <form [formGroup]="form"
+          (ngSubmit)="onSubmit(form.value)">
+          <!-- See https://developers.google.com/web/fundamentals/input/form/label-and-name-inputs
+               for details on where the autocomplete etc values come from -->
+        
+        <div id="addressInputs">
+            <div class="form-group">
+                <label for="streetAddress1">Street address</label>
+                <input type="text"
+                       formControlName="street"
+                       id="streetAddress1"
+                       name="address"
+                       autocomplete="street-address"
+                       placeholder="1600 Pennsylvania Ave">
+            </div>
+            <div class="form-group">
+                <label for="city1">City</label>
+                <input type="text"
+                       formControlName="city"
+                       id="city1"
+                       name="city"
+                       autocomplete="address-level2"
+                       placeholder="Washington, DC">
+            </div>
+            <div class="form-group">
+                <label for="state1">State</label>
+                    <select name="state" 
+                        formControlName="state"
+                        id="state1"
+                        name="state"
+                        autocomplete="state"
+                        placeholder="State">
+                        <option value="Alabama">Alabama</option>
+                        <option value="Alaska">Alaska</option>
+                        <option value="Arizona">Arizona</option>
+                        <option value="Arkansas">Arkansas</option>
+                        <option value="California">California</option>
+                        <option value="Colorado">Colorado</option>
+                        <option value="Connecticut">Connecticut</option>
+                        <option value="Delaware">Delaware</option>
+                        <option value="District of Columbia">District of Columbia</option>
+                        <option value="Florida">Florida</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Hawaii">Hawaii</option>
+                        <option value="Idaho">Idaho</option>
+                        <option value="Illinois">Illinois</option>
+                        <option value="Indiana">Indiana</option>
+                        <option value="Iowa">Iowa</option>
+                        <option value="Kansas">Kansas</option>
+                        <option value="Kentucky">Kentucky</option>
+                        <option value="Louisiana">Louisiana</option>
+                        <option value="Maine">Maine</option>
+                        <option value="Maryland">Maryland</option>
+                        <option value="Massachusetts">Massachusetts</option>
+                        <option value="Michigan">Michigan</option>
+                        <option value="Minnesota">Minnesota</option>
+                        <option value="Mississippi">Mississippi</option>
+                        <option value="Missouri">Missouri</option>
+                        <option value="Montana">Montana</option>
+                        <option value="Nebraska">Nebraska</option>
+                        <option value="Nevada">Nevada</option>
+                        <option value="New Hampshire">New Hampshire</option>
+                        <option value="New Jersey">New Jersey</option>
+                        <option value="New Mexico">New Mexico</option>
+                        <option value="New York">New York</option>
+                        <option value="North Carolina">North Carolina</option>
+                        <option value="North Dakota">North Dakota</option>
+                        <option value="Ohio">Ohio</option>
+                        <option value="Oklahoma">Oklahoma</option>
+                        <option value="Oregon">Oregon</option>
+                        <option value="Pennsylvania">Pennsylvania</option>
+                        <option value="Rhode Island">Rhode Island</option>
+                        <option value="South Carolina">South Carolina</option>
+                        <option value="South Dakota">South Dakota</option>
+                        <option value="Tennessee">Tennessee</option>
+                        <option value="Texas">Texas</option>
+                        <option value="Utah">Utah</option>
+                        <option value="Vermont">Vermont</option>
+                        <option value="Virginia">Virginia</option>
+                        <option value="Washington">Washington</option>
+                        <option value="West Virginia">West Virginia</option>
+                        <option value="Wisconsin">Wisconsin</option>
+                        <option value="Wyoming">Wyoming</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="zip1">Zip code</label>
+                    <input type="tel"
+                           formControlName="zipcode"
+                           id="zip1"
+                           name="postal"
+                           autocomplete="postal-code"
+                           ng-required="true"
+                           ng-pattern="patterns.postal"
+                           ng-model="addressData.postal"
+                           class="form-control input-lg"
+                           placeholder="20500">
+                </div>
+        </div>
+        <div>
+            <button type="submit" class="ui medium green button"
+                    [disabled]="!form.valid">Submit
+            </button>
+        </div>
+        <div *ngIf="form.controls.zipcode.errors?.pattern" class="error">
+            Well this is awkward, but we can't find your Representatives without avalid zipcode.
+        </div>
+
+        <br>
+        
+        <div class="whitebox-footer text-center">
+            Mostly built by Jesse and a lil bit by nate.
+        </div>
+    </form>
+</div>
+<br>
+<br>
+<select-rep [representatives]="reps"></select-rep>
+
