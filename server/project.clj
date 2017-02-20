@@ -1,4 +1,4 @@
-(defproject going-postal "0.1.0-SNAPSHOT"
+(defproject org.shipliberty/going-postal "0.1.0-SNAPSHOT"
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :min-lein-version "2.0.0"
@@ -11,7 +11,9 @@
                  [clj-http "2.0.0"]
                  [clj-datastore "0.3.0-SNAPSHOT"]
                  [ring-server "0.3.1"]
-                 [ring-cors "0.1.9"]]
+                 [ring-cors "0.1.9"]
+                 [ring/ring-json "0.4.0"]
+                 [org.shipliberty/lob-clj "0.1.1-SNAPSHOT"]]
   :plugins [[lein-ring "0.8.12"]
             ]
   :ring {:handler going-postal.handler/app
