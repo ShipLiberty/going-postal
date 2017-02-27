@@ -20,18 +20,21 @@
 
 (defn mywrap-request-logging [handler]
   (fn [{:keys [request-method uri] :as req}]
-    (let [
-          ;;body (when (:body req)
-          ;           (slurp (:body req))
-           ;          (.reset (:body req)))
-          _ (println (format "Processing %s %s" (.toUpperCase (name request-method)) uri))
-          _ (println (format "\t Params: %s" req));; (:params req)))
+    (try
+      (let [
+            ;;body (when (:body req)
+            ;           (slurp (:body req))
+            ;          (.reset (:body req)))
+            _ (println (format "Processing %s %s" (.toUpperCase (name request-method)) uri))
+            _ (println (format "\t Params: %s" req))
 
-;          _ (println (format "\t Body: %s" body))
-          ;resp (if (:body req) (handler (assoc req :body (java.io.ByteArrayInputStream. (.getBytes body)))) (handler req))]
-          resp (if (:body req) (handler req) (handler req))]
-      (println (format "Response %s" resp))
-      resp)))
+            resp (if (:body req) (handler req) (handler req))]
+        (println (format "Response %s" resp))
+        resp)
+      (catch Exception e
+        (println e)
+        (throw e)))))
+
 (def app
   (-> (routes home-routes app-routes)
       (mywrap-request-logging)
