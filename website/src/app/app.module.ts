@@ -5,6 +5,7 @@ import { HttpModule }           from '@angular/http';
 
 import { AppComponent }         from './app.component';
 import { SelectComponent }      from './select.component';
+import { LetterComponent }      from './letter.component';
 
 @NgModule({
   imports: [ 
@@ -14,7 +15,8 @@ import { SelectComponent }      from './select.component';
   ],
   declarations: [ 
     AppComponent,
-    SelectComponent
+    SelectComponent,
+    LetterComponent
   ],
   bootstrap: [ 
     AppComponent 

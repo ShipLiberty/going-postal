@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { LetterComponent } from './letter.component';
 
 @Component({
   selector   : 'select-rep',
@@ -9,8 +10,19 @@ import { Component, OnInit, Input } from '@angular/core';
 export class SelectComponent  {
     @Input() representatives:any;
     
-    onRepClick() {
-        console.log(this.representatives[0]);
-    }
+    //just some properties
+    rep: any = 4;
+    public repSelected = false;
+
+    /*
+    //called after the constructor and called  after the first ngOnChanges() 
+    ngOnInit(){
+        //console.log('this sure does work real nice like');
+    } */
     
+    //called when a representative is checkmarked
+    onRepClick(rep) {
+        this.rep = rep;
+        this.repSelected = true;
+    }
 }
