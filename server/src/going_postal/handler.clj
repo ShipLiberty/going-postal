@@ -20,9 +20,10 @@
 
 (defn mywrap-request-logging [handler]
   (fn [{:keys [request-method uri] :as req}]
-    (let [body (when (:body req)
-                     (slurp (:body req))
-                     (.reset (:body req)))
+    (let [
+          ;;body (when (:body req)
+          ;           (slurp (:body req))
+           ;          (.reset (:body req)))
           _ (println (format "Processing %s %s" (.toUpperCase (name request-method)) uri))
           _ (println (format "\t Params: %s" req));; (:params req)))
 
