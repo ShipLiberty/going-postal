@@ -21,6 +21,6 @@
 (def app
   (-> (routes home-routes app-routes)
       (wrap-cors :access-control-allow-origin [#"http://localhost:3000"]
-                 :access-control-allow-methods [:get])
+                 :access-control-allow-methods [:get :post])
       (handler/site)
       (wrap-base-url)))
