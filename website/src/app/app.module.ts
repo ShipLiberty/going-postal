@@ -2,6 +2,7 @@ import { NgModule }             from '@angular/core';
 import { BrowserModule }        from '@angular/platform-browser';
 import { ReactiveFormsModule }  from '@angular/forms';
 import { HttpModule }           from '@angular/http';
+import { FormsModule }   from '@angular/forms';
 
 import { AppComponent }         from './app.component';
 import { SelectComponent }      from './select.component';
@@ -11,7 +12,8 @@ import { LetterComponent }      from './letter.component';
   imports: [ 
     BrowserModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+    FormsModule
   ],
   declarations: [ 
     AppComponent,

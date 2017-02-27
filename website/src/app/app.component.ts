@@ -15,41 +15,57 @@ export class AppComponent  {
     ApiBaseUrl = 'https://frozen-refuge-69652.herokuapp.com/v1/lookup'; 
     hidden     = '';
     reps: Array<any> = [];
+    sender = {
+        address  : '',
+        address2 : '',
+        city     : '',
+        state    : '',
+        zip      : 0
+    };
     
     //called first time before the ngOnInit()    
     constructor(
         private http: Http
     ) {}
     
+    /*
     //called after the constructor and called  after the first ngOnChanges() 
-   /* ngOnInit(){
+    ngOnInit(){
 
     }*/
     
-    //form stuff, includes the properties and the validation
+    //form stuff, includes setting the properties and the validation
     form = new FormGroup({
-            street : new FormControl('', Validators.required),
-            city   : new FormControl('', Validators.required),
-            state  : new FormControl('', Validators.required),
-            zipcode: new FormControl('', Validators.compose([
-                Validators.required,
-                Validators.pattern('^\\d{5}(?:[-\\s]\\d{4})?$')
-            ])),
-        });
+        street : new FormControl('', Validators.required),
+        city   : new FormControl('', Validators.required),
+        state  : new FormControl('', Validators.required),
+        zipcode: new FormControl('', Validators.compose([
+            Validators.required,
+            Validators.pattern('^\\d{5}(?:[-\\s]\\d{4})?$')
+        ])),
+    });
 
     //function called on (form) submit
     onSubmit() {
-        var address = '?address=' + this.form.controls['street'].value;
-        var city    = '&city=' + this.form.controls['city'].value;
-        var state   = '&state=' + this.form.controls['state'].value;
-        var zip     = '&zip=' + this.form.controls['zipcode'].value;
+    
+        //set the sender object details
+        this.sender.address = this.form.controls['street'].value;
+        this.sender.city    = this.form.controls['city'].value;
+        this.sender.state   = this.form.controls['state'].value;
+        this.sender.zip     = this.form.controls['zipcode'].value;
+        
+        //lookup GET request endpoint string buildup
+        var address = '?address=' + this.sender.address;
+        var city    = '&city='    + this.sender.city;
+        var state   = '&state='   + this.sender.state;
+        var zip     = '&zip='     + this.sender.zip;
     
         var getString = this.ApiBaseUrl + address + city + state + zip;
     
-        //make the GET request for the representatives
+        //GET request for the representatives
         this.http.get(getString).subscribe(response => {
                 this.reps = response.json();
-                console.log(this.reps);
+                //console.log(this.reps);
         })
     }
 }
