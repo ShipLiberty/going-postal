@@ -1,8 +1,8 @@
 import { Component, OnInit }                  from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Http, URLSearchParams }              from '@angular/http';
+import { SelectComponent }                    from './select.component';
 import 'rxjs/add/operator/map';
-import { SelectComponent } from './select.component';
 
 @Component({
   selector   : 'my-app',
@@ -12,7 +12,7 @@ import { SelectComponent } from './select.component';
 
 export class AppComponent  {
     //just some properties
-    ApiBaseUrl = 'https://frozen-refuge-69652.herokuapp.com/lookup'; 
+    ApiBaseUrl = 'https://frozen-refuge-69652.herokuapp.com/v1/lookup'; 
     hidden     = '';
     reps: Array<any> = [];
     
