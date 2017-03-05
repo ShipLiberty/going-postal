@@ -191,7 +191,7 @@
 (defn make-senate-gov-lookup []
   (reify Lookup
     (lookup [_ street city state zip]
-      (let [two-letter-state (get-two-letter-state state)]
+      (let [two-letter-state state];(get-two-letter-state state)]
         (println "looking up for" two-letter-state)
         (lookup-by-state two-letter-state)))))
 
