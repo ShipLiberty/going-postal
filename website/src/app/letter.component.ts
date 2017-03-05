@@ -1,7 +1,8 @@
-import { Component, OnInit, Input }           from '@angular/core';
+import { Component, OnInit, Input, Inject }           from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Http, Headers, RequestOptions }      from '@angular/http';
 import 'rxjs/add/operator/map';
+import { APP_CONFIG, IAppConfig }             from './app.config';
 
 @Component({
   selector   : 'letter-input',
@@ -13,7 +14,6 @@ import 'rxjs/add/operator/map';
 export class LetterComponent  {
 
     //some variables
-    ApiBaseUrl = 'https://frozen-refuge-69652.herokuapp.com/v1/letters'; 
     @Input() representative:any;
     @Input() sender:any;
     name     = '';
@@ -21,9 +21,8 @@ export class LetterComponent  {
     body     : any = {};
     
     //called first time before the ngOnInit() method gets called    
-    constructor(
-        private http : Http,
-    ) {}
+    constructor(private http : Http,
+                @Inject(APP_CONFIG) private config: IAppConfig) {}
     
     //form stuff, includes setting the properties and the validation
     form = new FormGroup({
@@ -41,18 +40,16 @@ export class LetterComponent  {
                                  'state'   : this.sender.state, 
                                  'zip'     : +this.sender.zip},
                      'to'     : this.representative,
-                     'message': this.message,};
+                     'message': this.message};
         
         console.log('the JSON version of the body is: \n\n' + JSON.stringify(this.body));
-        console.log('state: ' + this.sender.state);
         
         //define some headers
-        //const headers = new Headers ({ 'Content-Type': 'application/json' })        
         let headers = new Headers({ 'content-type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         
         //POST request to tell Jesse to mail the letter!
-        this.http.post(this.ApiBaseUrl, JSON.stringify(this.body), options).subscribe(
+        this.http.post(this.config.apiEndpoint + 'v1/letters', JSON.stringify(this.body), options).subscribe(
             response => {
                             console.log('\n\n SUCCESS! =D \n\n');
                             console.log(response.json());
