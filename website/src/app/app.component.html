@@ -3,7 +3,6 @@
     <p>(we charge $1 for postage and all excess will go to a charity of your choice.)</p>
 </div>
 <br>
-<div *ngIf="hidden"> does this show up? guess not</div>
 <!-- ADDRESS FROM -->
 <div class="ui middle aligned center aligned grid">
     <form [formGroup]="form"
@@ -107,11 +106,9 @@
             </button>
         </div>
         <div *ngIf="form.controls.zipcode.errors?.pattern" class="error">
-            Well this is awkward, but we can't find your Representatives without avalid zipcode.
+            Well this is awkward, but we can't find your Representatives without a valid zipcode.
         </div>
-
         <br>
-        
         <div class="whitebox-footer text-center">
             Mostly built by Jesse and a lil bit by Nate.
         </div>

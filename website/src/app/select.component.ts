@@ -8,17 +8,12 @@ import { LetterComponent } from './letter.component';
 })
 
 export class SelectComponent  {
+    //just some properties
     @Input() representatives:any;
     @Input() sender:any;
     
-    //just some properties
-    rep: any = 4;
+    rep: any = {};
     public repSelected = false;
-
-    /*
-    //called after the constructor and called  after the first ngOnChanges() 
-    ngOnInit(){
-    } */
     
     //called when a representative is checkmarked
     onRepClick(rep) {
@@ -35,3 +30,6 @@ export class SelectComponent  {
         */
     }
 }
+
+
+//look into ngShow
