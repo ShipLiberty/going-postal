@@ -12,7 +12,7 @@
 
 
 (def senate-gov-url-all "https://www.senate.gov/general/contact_information/senators_cfm.cfm")
-(def senate-gov-resource (io/resource "data/senators_cfm.cfm"))
+(def senate-gov-resource (io/resource "data/senators_cfm.html"))
 
 (defn load-html-from-file []
   (with-open [r (io/reader senate-gov-resource)]
