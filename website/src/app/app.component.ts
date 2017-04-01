@@ -8,7 +8,7 @@ import { APP_CONFIG, IAppConfig }             from './app.config';
 @Component({
   selector   : 'my-app',
   templateUrl: 'app/app.component.html',
-  styleUrls  : ['semantic/dist/semantic.min.css']
+  styleUrls  : []
 })
 
 export class AppComponent  {

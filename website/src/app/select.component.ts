@@ -4,7 +4,7 @@ import { LetterComponent } from './letter.component';
 @Component({
   selector   : 'select-rep',
   templateUrl: 'app/select.component.html',
-  styleUrls  : ['semantic/dist/semantic.min.css']
+  styleUrls  : []
 })
 
 export class SelectComponent  {
