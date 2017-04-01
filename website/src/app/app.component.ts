@@ -2,6 +2,7 @@ import { Component, OnInit, Inject }          from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Http, URLSearchParams }              from '@angular/http';
 import { SelectComponent }                    from './select/select.component';
+import { HeaderComponent }                    from './header/header.component';
 import 'rxjs/add/operator/map';
 import { APP_CONFIG, IAppConfig }             from './app.config';
 
