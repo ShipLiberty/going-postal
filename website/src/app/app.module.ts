@@ -5,8 +5,8 @@ import { HttpModule }            from '@angular/http';
 import { FormsModule }           from '@angular/forms';
 
 import { AppComponent }          from './app.component';
-import { SelectComponent }       from './select.component';
-import { LetterComponent }       from './letter.component';
+import { SelectComponent }       from './select/select.component';
+import { LetterComponent }       from './letter/letter.component';
 import { APP_CONFIG, AppConfig } from './app.config';
 
 @NgModule({

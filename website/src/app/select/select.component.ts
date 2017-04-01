@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { LetterComponent } from './letter.component';
+import { LetterComponent } from './../letter/letter.component';
 
 @Component({
   selector   : 'select-rep',
-  templateUrl: 'app/select.component.html',
+  templateUrl: 'app/select/select.component.html',
   styleUrls  : []
 })
 
