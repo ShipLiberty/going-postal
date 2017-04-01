@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:900');
+
+
+#header {
+    color: #083954;
+    font-family: 'Lato';
+    font-size: 31px;
+}
+
+.line {
+    position: relative;
+    display: inline-block;
+    height: 2px;
+    width: 100%;
+    background-color: #CECDB7;
+}
