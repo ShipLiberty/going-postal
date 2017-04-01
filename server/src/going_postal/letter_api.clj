@@ -37,6 +37,7 @@
     {:status (or status 200)
      :headers {"Content-Type" "application/json"}
      :body (json/generate-string data)}))
+;; TODO: template file
 (def template
   "<html style='padding-top: 3in; margin: .5in;'>
     <body>
