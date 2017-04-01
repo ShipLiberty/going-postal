@@ -8,6 +8,7 @@ import { AppComponent }          from './app.component';
 import { SelectComponent }       from './select/select.component';
 import { LetterComponent }       from './letter/letter.component';
 import { HeaderComponent }       from './header/header.component';
+import { FooterComponent }       from './footer/footer.component';
 
 import { APP_CONFIG, AppConfig } from './app.config';
 
@@ -22,7 +23,8 @@ import { APP_CONFIG, AppConfig } from './app.config';
     AppComponent,
     SelectComponent,
     LetterComponent,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ],
   bootstrap: [ 
     AppComponent 

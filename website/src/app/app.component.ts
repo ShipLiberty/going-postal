@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Http, URLSearchParams }              from '@angular/http';
 import { SelectComponent }                    from './select/select.component';
 import { HeaderComponent }                    from './header/header.component';
+import { FooterComponent }                    from './footer/footer.component';
 import 'rxjs/add/operator/map';
 import { APP_CONFIG, IAppConfig }             from './app.config';
 
