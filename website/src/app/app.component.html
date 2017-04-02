@@ -5,7 +5,10 @@
 </div>
 <br>
 <search-reps [reps]="reps"
-             [sender]="sender"></search-reps>
+             [sender]="sender"
+             (repsChanged)="onRepsChanged($event)"
+             (senderChanged)="onSenderChanged($event)">
+</search-reps>
 <br>
 <div class="whitebox-footer text-center">
     Mostly built by Jesse and a lil bit by Nate and Rob.
@@ -13,6 +16,7 @@
 <br>
 <br>
 <select-rep [representatives]="reps"
-            [sender]="sender"></select-rep>
+            [sender]="sender">
+</select-rep>
 <site-footer></site-footer>
 

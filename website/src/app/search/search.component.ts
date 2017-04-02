@@ -1,8 +1,8 @@
-import { Component, OnInit, Inject, Input }   from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Http, URLSearchParams }              from '@angular/http';
+import { Component, OnInit, Inject, Input, Output, EventEmitter }   from '@angular/core';
+import { FormGroup, FormControl, Validators }                       from '@angular/forms';
+import { Http, URLSearchParams }                                    from '@angular/http';
 import 'rxjs/add/operator/map';
-import { APP_CONFIG, IAppConfig }             from './../app.config';
+import { APP_CONFIG, IAppConfig }                                   from './../app.config';
 
 @Component({
   selector   : 'search-reps',
@@ -14,6 +14,9 @@ export class SearchComponent  {
     //just some properties
     @Input() reps  : any;
     @Input() sender: any;
+    
+    @Output() repsChanged  : EventEmitter<any> = new EventEmitter<any>();    
+    @Output() senderChanged: EventEmitter<any> = new EventEmitter<any>();    
     
     //called first time before the ngOnInit()    
     constructor(private http: Http, 
@@ -51,7 +54,11 @@ export class SearchComponent  {
         //GET request for the representatives
         this.http.get(getString).subscribe(response => {
                 this.reps = response.json();
-                console.log(this.reps);
+                console.log('reps from the search component:' + this.reps);
+                
+                //notify app component of changes
+                this.repsChanged.emit(this.reps);
+                this.senderChanged.emit(this.sender);
         })
     }
 }

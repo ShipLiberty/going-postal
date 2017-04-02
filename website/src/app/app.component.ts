@@ -20,7 +20,17 @@ export class AppComponent  {
         state    : '',
         zip      : 0
     };
+    
+    //on getting back data from the search component
+    onRepsChanged(reps) {
+        this.reps = reps;
+        console.log('main app reps: ' + this.reps);
+    }
+    
+    onSenderChanged(sender) {
+        this.sender = sender;
+        console.log('main app sender: '+ this.sender);
+    }
 }
 
 
-//look into making api service module
