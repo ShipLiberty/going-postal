@@ -1,3 +1,0 @@
-[submodule "website/src/semantic"]
-	path = website/src/semantic
-	url = https://github.com/ShipLiberty/semantic.git 
