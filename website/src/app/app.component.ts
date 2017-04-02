@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject }          from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Http, URLSearchParams }              from '@angular/http';
+import { SelectComponent }                    from './search/search.component';
 import { SelectComponent }                    from './select/select.component';
 import { HeaderComponent }                    from './header/header.component';
 import { FooterComponent }                    from './footer/footer.component';

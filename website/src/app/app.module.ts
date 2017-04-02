@@ -5,6 +5,7 @@ import { HttpModule }            from '@angular/http';
 import { FormsModule }           from '@angular/forms';
 
 import { AppComponent }          from './app.component';
+import { SearchComponent }       from './search/search.component';
 import { SelectComponent }       from './select/select.component';
 import { LetterComponent }       from './letter/letter.component';
 import { HeaderComponent }       from './header/header.component';
@@ -21,6 +22,7 @@ import { APP_CONFIG, AppConfig } from './app.config';
   ],
   declarations: [ 
     AppComponent,
+    SearchComponent,
     SelectComponent,
     LetterComponent,
     HeaderComponent,
