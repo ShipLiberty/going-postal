@@ -4,7 +4,8 @@ import { LetterComponent } from './../letter/letter.component';
 @Component({
   selector   : 'select-rep',
   templateUrl: 'app/select/select.component.html',
-  styleUrls  : []
+  styleUrls  : ['./semantic/dist/semantic.min.css',
+                'app/select/select.component.css']
 })
 
 export class SelectComponent  {
@@ -15,7 +16,7 @@ export class SelectComponent  {
     rep: any = {};
     public repSelected = false;
     
-    //called when a representative is checkmarked
+    //called when a representative is selected
     onRepClick(rep) {
         this.rep = rep;
         this.repSelected = true;
@@ -30,6 +31,3 @@ export class SelectComponent  {
         */
     }
 }
-
-
-//look into ngShow

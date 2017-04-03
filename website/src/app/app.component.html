@@ -1,22 +1,19 @@
 <site-header></site-header>
-<div class="ui text container center aligned"
-     [ngSwitch]="currentView">
-    <br>
-    <br>
-    <br>
-    <search-reps *ngSwitchCase="'search'"
-                 [reps]="reps"
-                 [sender]="sender"
-                 (repsChanged)="onRepsChanged($event)"
-                 (senderChanged)="onSenderChanged($event)">
-    </search-reps>
-    <select-rep *ngSwitchCase="'select'"
-                [representatives]="reps"
-                [sender]="sender">
-    </select-rep>
-    <br>
-    <br>
-    <br>
+<div [ngSwitch]="currentView">
+    <div class="ui text container center aligned">
+        <br>
+        <br>
+        <search-reps *ngSwitchCase="'search'"
+                     [reps]="reps"
+                     [sender]="sender"
+                     (repsChanged)="onRepsChanged($event)"
+                     (senderChanged)="onSenderChanged($event)">
+        </search-reps>
+        <select-rep *ngSwitchCase="'select'"
+                    [representatives]="reps"
+                    [sender]="sender">
+        </select-rep>
+    </div>
 </div>
 <site-footer></site-footer>
 
