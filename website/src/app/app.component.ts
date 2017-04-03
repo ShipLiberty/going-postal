@@ -22,15 +22,30 @@ export class AppComponent  {
         zip      : 0
     };
     
+    //for showing the correct component using ngSwitch
+    currentView: string;
+    
+    //called after the constructor and called  after the first ngOnChanges() 
+    ngOnInit(){
+        this.currentView = 'search';
+    }
+    
     //on getting back data from the search component
     onRepsChanged(reps) {
         this.reps = reps;
         console.log('main app reps: ' + this.reps);
+        
+        this.currentView = 'select';
     }
     
     onSenderChanged(sender) {
         this.sender = sender;
         console.log('main app sender: '+ this.sender);
+    }
+    
+    //this is used to show the correct component using ngSwitch
+    setCurrentView(view) {
+        this.currentView = view;
     }
 }
 

@@ -1,23 +1,26 @@
 <site-header></site-header>
-<div class="ui text container center aligned">
+<div class="ui text container center aligned"
+     [ngSwitch]="currentView">
+    <br>
+    <br>
+    <br>
     <h1 id="appTitle1">Find your representatives.</h1>
     <h1 id="appTitle2">Send them real letters.</h1>
-    <p>(we charge $1 for postage and all excess will go to a charity of your choice.)</p>
+    <br>
+    <br>
+    <search-reps *ngSwitchCase="'search'"
+                 [reps]="reps"
+                 [sender]="sender"
+                 (repsChanged)="onRepsChanged($event)"
+                 (senderChanged)="onSenderChanged($event)">
+    </search-reps>
+    <select-rep *ngSwitchCase="'select'"
+                [representatives]="reps"
+                [sender]="sender">
+    </select-rep>
+    <br>
+    <br>
+    <br>
 </div>
-<br>
-<search-reps [reps]="reps"
-             [sender]="sender"
-             (repsChanged)="onRepsChanged($event)"
-             (senderChanged)="onSenderChanged($event)">
-</search-reps>
-<br>
-<div class="whitebox-footer text-center">
-    Mostly built by Jesse and a lil bit by Nate and Rob.
-</div>
-<br>
-<br>
-<select-rep [representatives]="reps"
-            [sender]="sender">
-</select-rep>
 <site-footer></site-footer>
 

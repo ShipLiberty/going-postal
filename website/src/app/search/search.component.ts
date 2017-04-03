@@ -7,7 +7,8 @@ import { APP_CONFIG, IAppConfig }                                   from './../a
 @Component({
   selector   : 'search-reps',
   templateUrl: 'app/search/search.component.html',
-  styleUrls  : ['app/search/search.component.css']
+  styleUrls  : ['app/search/search.component.css',
+                './../semantic/dist/semantic.min.css']
 })
 
 export class SearchComponent  {
