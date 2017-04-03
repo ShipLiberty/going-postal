@@ -55,7 +55,7 @@ export class SearchComponent  {
         //GET request for the representatives
         this.http.get(getString).subscribe(response => {
                 this.reps = response.json();
-                console.log('reps from the search component:' + this.reps);
+                //console.log('reps from the search component:' + this.reps);
                 
                 //notify app component of changes
                 this.repsChanged.emit(this.reps);

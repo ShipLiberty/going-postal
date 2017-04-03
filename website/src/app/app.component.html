@@ -11,8 +11,12 @@
         </search-reps>
         <select-rep *ngSwitchCase="'select'"
                     [representatives]="reps"
-                    [sender]="sender">
+                    (repSelected)="onRepSelected($event)">
         </select-rep>
+        <letter-input *ngSwitchCase="'letter'"
+                      [representative]="selectedRep" 
+                      [sender]="sender">
+        </letter-input>
     </div>
 </div>
 <site-footer></site-footer>
