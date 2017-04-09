@@ -1,11 +1,10 @@
 <h1 class="left floated" id="selectTitle">Select a representative to write to:</h1>
-<div class="ui three cards" *ngFor="let representative of representatives" >
-    <div class="raised card">
+<div class="ui three stackable cards">
+     <div class="card" *ngFor="let representative of representatives">
         <div class="image">
             <img *ngIf="representative['image-url']"
                  class="ui avatar image" 
-                 src="http://{{representative['image-url']}}"
-            >
+                 src="http://{{representative['image-url']}}">
         </div>
         <div class="content">
             <span class= "left floated" id="cardRepName">
@@ -22,3 +21,4 @@
         </div>
     </div>    
 </div>
+   
