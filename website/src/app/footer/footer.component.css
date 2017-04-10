@@ -1,8 +1,5 @@
-footer {
-    position:fixed;
-    left:0px;
-    bottom:0px;
-    height:100px;
-    width:100%;
+#footer {
+    margin-top: 5em;
+    padding: 100px;
     background:#083954;
 }

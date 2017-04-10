@@ -3,14 +3,8 @@
 #header {
     color: #083954;
     font-family: 'Lato';
-    font-size: 31pt;
+    font-size: 20pt;
     font-weight: 900;
-}
-
-.line {
-    position: relative;
-    display: inline-block;
-    height: 2px;
-    width: 100%;
-    background-color: #CECDB7;
+    border-bottom: 1px solid #CECDB7;
+    padding: .5em;
 }

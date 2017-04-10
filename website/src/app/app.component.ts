@@ -8,8 +8,8 @@ import { FooterComponent }  from './footer/footer.component';
 @Component({
   selector   : 'my-app',
   templateUrl: 'app/app.component.html',
-  styleUrls  : ['./app/app.component.css',
-                './semantic/dist/semantic.min.css']
+  styleUrls  : ['./semantic/dist/semantic.min.css',
+                './app/app.component.css']
 })
 
 export class AppComponent  {

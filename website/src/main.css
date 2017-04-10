@@ -1,0 +1,17 @@
+
+html {
+  height: 100%;
+}
+
+body {
+  background-color:#F9F9F3;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+my-app {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}

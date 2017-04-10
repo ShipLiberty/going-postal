@@ -18,3 +18,16 @@
     font-size: 30pt;
     display:inline;
 }
+
+#search-fields {
+    margin-top: 2em;
+}
+
+#search-labels {
+    text-align: left;
+    padding-left: 1em;
+    font-family: 'Lato';
+    font-size: 12pt;
+    font-weight: 300;
+
+}

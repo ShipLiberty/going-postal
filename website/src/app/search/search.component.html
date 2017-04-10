@@ -1,10 +1,9 @@
 <br>
 <h1 id="appTitle1">Find your representatives.</h1>
 <h1 id="appTitle2">Send them real letters.</h1>
-<br>
-<br>
+
 <!-- ADDRESS FROM -->
-<div class="ui middle aligned center aligned grid">
+<div id="search-fields" class="ui middle aligned center aligned grid">
     <form [formGroup]="form"
           (ngSubmit)="onSubmit(form.value)">
           <!-- See https://developers.google.com/web/fundamentals/input/form/label-and-name-inputs
@@ -13,8 +12,8 @@
         <div id="addressInputs">
             <div class="ui form">
                 <div class="fields">
-                    <div class="six wide field">
-                        <label for="streetAddress1">Street address</label>
+                    <div class="five wide field">
+                        <label id="search-labels" for="streetAddress1">Street address</label>
                         <input type="text"
                                formControlName="street"
                                id="streetAddress1"
@@ -23,8 +22,8 @@
                                placeholder="1600 Pennsylvania Ave">
                     </div>
                     
-                    <div class="six wide field">
-                        <label for="city1">City</label>
+                    <div class="five wide field">
+                        <label id="search-labels" for="city1">City</label>
                         <input type="text"
                                formControlName="city"
                                id="city1"
@@ -34,7 +33,7 @@
                     </div>
                     
                     <div class="four wide field">
-                        <label for="state1">State</label>
+                        <label id="search-labels" for="state1">State</label>
                         <select name="state" 
                                 formControlName="state"
                                 id="state1"
@@ -95,8 +94,8 @@
                         </select>
                     </div>
                     
-                    <div class="four wide field">
-                        <label for="zip1">Zip code</label>
+                    <div class="three wide field">
+                        <label id="search-labels" for="zip1">Zip code</label>
                         <input type="tel"
                                formControlName="zipcode"
                                id="zip1"
@@ -104,16 +103,19 @@
                                autocomplete="postal-code"
                                placeholder="20500">
                     </div>
+
+                    <div class="three wide field">
+                        <label id="search-labels"><br></label>
+                        <button type="submit" 
+                                class="fluid ui medium button"
+                                id="searchRepsButton"
+                                [disabled]="!form.valid">Submit
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <div>
-            <button type="submit" 
-                    class="ui medium button"
-                    id="searchRepsButton"
-                    [disabled]="!form.valid">Submit
-            </button>
-        </div>
+
     </form>
 </div>
