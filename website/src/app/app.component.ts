@@ -1,14 +1,15 @@
-import { Component, OnInit, Inject }          from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Http, URLSearchParams }              from '@angular/http';
-import { SelectComponent }                    from './select.component';
-import 'rxjs/add/operator/map';
-import { APP_CONFIG, IAppConfig }             from './app.config';
+import { Component }        from '@angular/core';
+import { HeaderComponent }  from './header/header.component';
+import { SearchComponent }  from './search/search.component';
+import { SelectComponent }  from './select/select.component';
+import { LetterComponent }  from './letter/letter.component';
+import { FooterComponent }  from './footer/footer.component';
 
 @Component({
   selector   : 'my-app',
   templateUrl: 'app/app.component.html',
-  styleUrls  : ['semantic/dist/semantic.min.css']
+  styleUrls  : ['./app/app.component.css',
+                './semantic/dist/semantic.min.css']
 })
 
 export class AppComponent  {
@@ -21,52 +22,40 @@ export class AppComponent  {
         state    : '',
         zip      : 0
     };
+    selectedRep: any = {};
     
-    //called first time before the ngOnInit()    
-    constructor(private http: Http, 
-                @Inject(APP_CONFIG) private config: IAppConfig) {}
+    //for showing the correct component using ngSwitch
+    currentView: string;
     
-    /*
     //called after the constructor and called  after the first ngOnChanges() 
     ngOnInit(){
-
-    }*/
+        this.currentView = 'search';
+    }
     
-    //form stuff, includes setting the properties and the validation
-    form = new FormGroup({
-        street : new FormControl('', Validators.required),
-        city   : new FormControl('', Validators.required),
-        state  : new FormControl('', Validators.required),
-        zipcode: new FormControl('', Validators.compose([
-            Validators.required,
-            Validators.pattern('^\\d{5}(?:[-\\s]\\d{4})?$')
-        ])),
-    });
-
-    //function called on (form) submit
-    onSubmit() {
+    //this is used to show the correct component using ngSwitch
+    setCurrentView(view) {
+        this.currentView = view;
+    }
     
-        //set the sender object details
-        this.sender.address = this.form.controls['street'].value;
-        this.sender.city    = this.form.controls['city'].value;
-        this.sender.state   = this.form.controls['state'].value;
-        this.sender.zip     = this.form.controls['zipcode'].value;
+    //on getting back data from the search component
+    onRepsChanged(reps) {
+        this.reps = reps;
+        //console.log('main app reps: ' + this.reps);
         
-        //lookup GET request endpoint string buildup
-        var address = 'address=' + this.sender.address;
-        var city    = '&city='    + this.sender.city;
-        var state   = '&state='   + this.sender.state;
-        var zip     = '&zip='     + this.sender.zip;
+        this.currentView = 'select';
+    }
+    onSenderChanged(sender) {
+        this.sender = sender;
+        //console.log('main app sender: '+ this.sender);
+    }
     
-        var getString = this.config.apiEndpoint + 'v1/lookup?' + address + city + state + zip;
-    
-        //GET request for the representatives
-        this.http.get(getString).subscribe(response => {
-                this.reps = response.json();
-                console.log(this.reps);
-        })
+    //on getting back data from the select component
+    onRepSelected(rep) {
+        this.selectedRep = rep;
+        //console.log('main app selected rep: ' + this.selectedRep);
+        
+        this.currentView = 'letter';
     }
 }
 
 
-//look into making api service module

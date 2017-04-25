@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css?family=Adamina|Lato:300,300i,400,700,900');
+
+#searchRepsButton {
+    background-color: #DA2C38;
+    color: white;
+}
+
+#appTitle1 {
+    color: #DA2C38;
+    font-family: 'Adamina';
+    font-size: 30pt;
+    display:inline;
+}
+
+#appTitle2 {
+    color: #282827;
+    font-family: 'Adamina';
+    font-size: 30pt;
+    display:inline;
+}

@@ -2,13 +2,13 @@ import { Component, OnInit, Input, Inject }           from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Http, Headers, RequestOptions }      from '@angular/http';
 import 'rxjs/add/operator/map';
-import { APP_CONFIG, IAppConfig }             from './app.config';
+import { APP_CONFIG, IAppConfig }             from './../app.config';
 
 @Component({
   selector   : 'letter-input',
-  templateUrl: 'app/letter.component.html',
-  styleUrls  : ['semantic/dist/semantic.min.css',
-                'app/letter.component.css']
+  templateUrl: 'app/letter/letter.component.html',
+  styleUrls  : [
+                'app/letter/letter.component.css']
 })
 
 export class LetterComponent  {

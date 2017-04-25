@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700');
+
+#selectTitle {
+    color: #282827;
+    font-family: 'Lato';
+    font-size: 18pt;
+    font-weight: 700;
+}
+
+#cardRepName {
+    color: #083954;
+    font-family: 'Lato';
+    font-size: 16pt;
+    font-weight: 400;
+}
+
+#cardRepTitle {
+    color: #595851;
+    font-family: 'Lato';
+    font-size: 14pt;
+    font-weight: 300;
+}
