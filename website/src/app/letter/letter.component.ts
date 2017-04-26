@@ -7,8 +7,8 @@ import { APP_CONFIG, IAppConfig }             from './../app.config';
 @Component({
   selector   : 'letter-input',
   templateUrl: 'app/letter/letter.component.html',
-  styleUrls  : [
-                'app/letter/letter.component.css']
+  styleUrls  : ['app/letter/letter.component.css',
+                './../semantic/dist/semantic.min.css']
 })
 
 export class LetterComponent  {
