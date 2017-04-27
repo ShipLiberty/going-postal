@@ -13,6 +13,7 @@
                  [ring-server "0.3.1"]
                  [ring-cors "0.1.9"]
                  [ring/ring-json "0.4.0"]
+                 [abengoa/clj-stripe "1.0.5-SNAPSHOT"]
                  [org.shipliberty/lob-clj "0.1.1-SNAPSHOT"]]
   :plugins [[lein-ring "0.8.12"]
             ]

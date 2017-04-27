@@ -66,9 +66,8 @@
         signature (:name from)
         content (->Content today salutation message signature)]
     (println "sending: " (make-address-from-from-args from) (make-address-from-contact-record to) content)
-    (-> (l/send-letter @client
+    (l/send-letter @client
                    (make-address-from-from-args from)
                    (make-address-from-contact-record to)
                    template
-                   content)
-        (json-response))))
+                   content)))
