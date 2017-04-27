@@ -11,3 +11,4 @@ pom.xml
 .lein-env
 .lein-repl-history
 *.swp
+.DS_Store
