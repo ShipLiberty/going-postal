@@ -39,7 +39,7 @@ export class LetterComponent  {
 
         //stripe handler
         var handler = (<any>window).StripeCheckout.configure({
-            key: 'pk_test_oi0sKPJYLGjdvOXOM8tE8cMa',
+            key: this.config.stripeKey,
             locale: 'auto',
             token: function (token: any) {
                 // You can access the token ID with `token.id`.

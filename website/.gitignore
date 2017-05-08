@@ -8,3 +8,5 @@ bower_components
 src/*.map
 src/*.js
 !src/systemjs.*
+src/app/app.environment.ts
+*.log
