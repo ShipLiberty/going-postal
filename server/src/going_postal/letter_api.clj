@@ -1,5 +1,6 @@
 (ns going-postal.letter-api
-  (:require [cheshire.core :as json]
+  (:require [clojure.java.io :as io] 
+            [cheshire.core :as json]
             [lob-clj.core :refer [make-client]]
             [lob-clj.letters :as l]
             [lob-clj.models :refer [->Address]]))
@@ -37,24 +38,12 @@
     {:status (or status 200)
      :headers {"Content-Type" "application/json"}
      :body (json/generate-string data)}))
-;; TODO: template file
-(def template
-  "<html style='padding-top: 3in; margin: .5in;'>
-    <body>
-      <p>{{date}}</p>
-      <p>Dear {{salutation}},</p>
-      <p>{{text}}</p>
-      <p>Sincerely,</p>
-      <p>{{signature}}</p>
-    </body>
-   </html>")
 
+(defn template []
+  (let [turl (io/resource "letter_template.html")]
+    (slurp turl)))
 
-      ;(->> [:firstname :middlename :lastname :suffix]
-                  ;     (map #(from %))
-                  ;     (clojure.string/join " "))
-
-(defn handle-post-letter [{{:keys [from to message] :as body} :body}]
+(defn handle-post-letter [{{:keys [from to message]} :body}]
   (let [today (. (java.text.SimpleDateFormat. "MMMM d, YYYY")
                  format (java.util.Date.))
         salutation (str
@@ -69,5 +58,5 @@
     (l/send-letter @client
                    (make-address-from-from-args from)
                    (make-address-from-contact-record to)
-                   template
+                   (template)
                    content)))

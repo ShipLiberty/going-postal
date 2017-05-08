@@ -7,11 +7,18 @@
 (def currency "usd")
 
 (defn create-charge [token amt desc]
+  (println "In create-charge: " token ", " amt ", " desc)
   (common/with-token api-key
     (let [{:keys [error] :as resp} (common/execute (charges/create-charge
                                                      (common/money-quantity amt currency)
                                                      (common/source token)
-                                                     (common/description charge-desc)))]
-      (if-let [{:keys [charge]} error]
-        (merge (common/execute (charges/get-charge charge)) resp)
-        resp))))
+                                                     (common/description desc)))]
+      (if-not error 
+        resp
+        ;; Error conditions...
+        (if-let [charge (:charge error)]
+          ;; If there's a charge, merge the charge into the error and return the response
+          (merge (common/execute (charges/get-charge (:charge error))) resp) 
+          ;; Otherwise, it's a server error.  Abort the whole thing
+          (throw (ex-info "" error)))
+        ))))
