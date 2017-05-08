@@ -16,8 +16,6 @@ export class LetterComponent  {
     //some variables
     @Input() representative:any;
     @Input() sender:any;
-    name     = '';
-    message  = '';
     body     : any = {};
     stripeToken  = '';
     
@@ -26,6 +24,7 @@ export class LetterComponent  {
                 @Inject(APP_CONFIG) private config: IAppConfig) {}
     
     //form stuff, includes setting the properties and the validation
+    //NOTE: defines name and message (used below in post fn)
     form = new FormGroup({
         name    : new FormControl('', Validators.required),
         message : new FormControl('', Validators.required),
@@ -62,15 +61,15 @@ export class LetterComponent  {
     
         console.log('the striple token is: ' + this.stripeToken);
         //make the body object
-        this.body = {'from'   : {'name'    : this.name, 
+        this.body = {'from'   : {'name'    : this.form.value.name,
                                  'address' : this.sender.address, 
                                  'address2': this.sender.address2, 
                                  'city'    : this.sender.city, 
                                  'state'   : this.sender.state, 
                                  'zip'     : +this.sender.zip},
-                                 'to'      : this.representative,
-                                 'message' : this.message,
-                             'stripeToken' : this.stripeToken      
+                     'to'      : this.representative,
+                     'message' : this.form.value.message,
+                     'stripeToken' : this.stripeToken
                     };
         
         console.log('the JSON version of the body is: \n\n' + JSON.stringify(this.body));
