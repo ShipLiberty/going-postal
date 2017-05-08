@@ -9,8 +9,7 @@ export interface IAppConfig {
 };
 
 export const AppConfig: IAppConfig = {    
-//    apiEndpoint: "https://frozen-refuge-69652.herokuapp.com/"    
-    apiEndpoint: "http://localhost:4000/",
+    apiEndpoint: "https://frozen-refuge-69652.herokuapp.com/", 
     stripeKey: STRIPE_PUBLISHABLE_KEY
 };
 
