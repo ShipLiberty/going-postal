@@ -2,7 +2,7 @@
   (:require [clj-stripe.common :as common]
             [clj-stripe.charges :as charges]))
 
-(def api-key (. System (getenv "STRIPE_API_KEY")))
+(def api-key (. System (getenv "STRIPE_SECRET_KEY")))
 
 (def currency "usd")
 
