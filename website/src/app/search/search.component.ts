@@ -67,16 +67,17 @@ export class SearchComponent implements AfterViewInit{
         this.sender.zip     = this.form.controls['zipcode'].value;
         
         //lookup GET request endpoint string buildup
-        var address = 'address=' + this.sender.address;
-        var city    = '&city='    + this.sender.city;
-        var state   = '&state='   + this.sender.state;
-        var zip     = '&zip='     + this.sender.zip;
-    
+        var address = 'address=' + encodeURIComponent(this.sender.address);
+        var city    = '&city='    + encodeURIComponent(this.sender.city);
+        var state   = '&state='   + encodeURIComponent(this.sender.state);
+        var zip     = '&zip='     + encodeURIComponent(this.sender.zip);
+
         var getString = this.config.apiEndpoint + 'v1/lookup?' + address + city + state + zip;
-    
+
         console.log(getString);
         //GET request for the representatives
         this.http.get(getString).subscribe(response => {
+                //FIXME: handle errors!
                 this.reps = response.json();
                 //console.log('reps from the search component:' + this.reps);
                 
