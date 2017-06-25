@@ -18,7 +18,9 @@ export class SearchComponent  {
     
     @Output() repsChanged  : EventEmitter<any> = new EventEmitter<any>();    
     @Output() senderChanged: EventEmitter<any> = new EventEmitter<any>();    
-    
+
+    isLoading = false;
+
     //called first time before the ngOnInit()    
     constructor(private http: Http, 
                 @Inject(APP_CONFIG) private config: IAppConfig) {}
@@ -37,6 +39,7 @@ export class SearchComponent  {
     //function called on (form) submit
     onSubmit() {
     
+        this.isLoading = true;
         //set the sender object details
         this.sender.address = this.form.controls['street'].value;
         this.sender.city    = this.form.controls['city'].value;
