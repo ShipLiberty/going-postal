@@ -1,0 +1,46 @@
+
+<div id="breadcrumbs" class="ui padded container">
+    <div class="ui breadcrumb">
+      <div class="active section" *ngIf="activeStage == 0">Search</div>
+      <a class="section" *ngIf="activeStage > 0" (click)="breadcrumbClicked(0)"> Search</a>
+      <span class="divider">/</span>
+      <div class="section" *ngIf="activeStage == 1 || latestStage < 1" [class.active]="activeStage == 1">Select</div>
+      <a class="section" *ngIf="activeStage != 1 && latestStage >= 1" (click)="breadcrumbClicked(1)">Select</a>
+      <span class="divider">/</span>
+      <div class="section" *ngIf="activeStage == 2 || latestStage < 2" [class.active]="activeStage == 2">Write</div>
+      <a class="section" *ngIf="activeStage != 2 && latestStage >= 2" (click)="breadcrumbClicked(2)">Write</a>
+      <span class="divider">/</span>
+      <div class="section" *ngIf="activeStage == 3 || latestStage < 3" [class.active]="activeStage == 3">Pay</div>
+      <a class="section" *ngIf="activeStage != 3 && latestStage >= 3" (click)="breadcrumbClicked(3)">Pay</a>
+      <span class="divider">/</span>
+      <div class="section" *ngIf="activeStage <= 4" [class.active]="activeStage == 4">Shipped!</div>
+    </div>
+<!--
+<div class="ui steps">
+  <div class="link step">
+    <div class="content">
+      <div class="title">Search</div>
+    </div>
+  </div>
+  <div class="link step">
+    <div class="content">
+      <div class="title">Select</div>
+    </div>
+  </div>
+  <div class="link step">
+    <div class="content">
+      <div class="title">Write</div>
+    </div>
+  </div>
+  <div class="link step">
+    <div class="content">
+      <div class="title">Pay</div>
+    </div>
+  </div>
+  <div class="link step">
+    <div class="content">
+      <div class="title">Shipped!</div>
+    </div>
+  </div>
+</div> -->
+</div>

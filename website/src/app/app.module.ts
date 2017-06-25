@@ -10,6 +10,7 @@ import { SelectComponent }       from './select/select.component';
 import { LetterComponent }       from './letter/letter.component';
 import { HeaderComponent }       from './header/header.component';
 import { FooterComponent }       from './footer/footer.component';
+import { BreadcrumbsComponent }  from './breadcrumbs/breadcrumbs.component';
 
 import { APP_CONFIG, AppConfig } from './app.config';
 
@@ -26,7 +27,8 @@ import { APP_CONFIG, AppConfig } from './app.config';
     SelectComponent,
     LetterComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    BreadcrumbsComponent
   ],
   bootstrap: [ 
     AppComponent 

@@ -17,6 +17,11 @@
                       [representative]="selectedRep" 
                       [sender]="sender">
         </letter-input>
+    <br>
+    <breadcrumbs [activeStage]="currentViewNumber"
+                 [latestStage]="latestViewNumber"
+                 (stageClicked)="switchCurrentView($event)">
+    </breadcrumbs>
     </div>
 </div>
 <site-footer></site-footer>

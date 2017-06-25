@@ -22,27 +22,42 @@ export class AppComponent  {
         state    : '',
         zip      : 0
     };
-    selectedRep: any = {};
+
+    stages = ['search', 'select', 'letter', 'pay', 'shipped'];
     
+    selectedRep: any = {};
+
     //for showing the correct component using ngSwitch
     currentView: string;
-    
+    currentViewNumber = 0;
+    latestViewNumber = 0;
+
     //called after the constructor and called  after the first ngOnChanges() 
     ngOnInit(){
-        this.currentView = 'search';
+        this.setCurrentView('search');
     }
     
     //this is used to show the correct component using ngSwitch
+    // NOTE: This inits the view as the latest view
     setCurrentView(view) {
         this.currentView = view;
+        this.currentViewNumber = this.stages.indexOf(view)
+        this.latestViewNumber = this.currentViewNumber;
     }
-    
+
+    // NOTE: This keeps the latest view untouched.  Used in navigation, breadcrumbs, etc
+    switchCurrentView(viewNumber) {
+        this.currentView = this.stages[viewNumber];
+        this.currentViewNumber = viewNumber;
+        this.latestViewNumber = Math.max(this.currentViewNumber, this.latestViewNumber);
+    }
+
     //on getting back data from the search component
     onRepsChanged(reps) {
         this.reps = reps;
         //console.log('main app reps: ' + this.reps);
         
-        this.currentView = 'select';
+        this.setCurrentView('select');
     }
     onSenderChanged(sender) {
         this.sender = sender;
@@ -54,7 +69,7 @@ export class AppComponent  {
         this.selectedRep = rep;
         //console.log('main app selected rep: ' + this.selectedRep);
         
-        this.currentView = 'letter';
+        this.setCurrentView('letter');
     }
 }
 
