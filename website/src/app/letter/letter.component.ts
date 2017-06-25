@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Inject }           from '@angular/core';
+import { Component, OnInit, Input, Inject }   from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Http, Headers, RequestOptions }      from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -11,23 +11,24 @@ import { APP_CONFIG, IAppConfig }             from './../app.config';
                 './../semantic/dist/semantic.min.css']
 })
 
-export class LetterComponent  {
+export class LetterComponent {
 
     //some variables
     @Input() representative:any;
     @Input() sender:any;
     body     : any = {};
     stripeToken  = '';
-    
+
     //called first time before the ngOnInit() method gets called    
     constructor(private http : Http,
                 @Inject(APP_CONFIG) private config: IAppConfig) {}
-    
+
+
     //form stuff, includes setting the properties and the validation
     //NOTE: defines name and message (used below in post fn)
     form = new FormGroup({
-        name    : new FormControl('', Validators.required),
-        message : new FormControl('', Validators.required),
+        yourname : new FormControl('', Validators.required),
+        message  : new FormControl('', Validators.required),
     });
     
     //function called on submit, send letter to Jesse here.
@@ -61,7 +62,7 @@ export class LetterComponent  {
     
         console.log('the striple token is: ' + this.stripeToken);
         //make the body object
-        this.body = {'from'   : {'name'    : this.form.value.name,
+        this.body = {'from'   : {'name'    : this.form.value.yourname,
                                  'address' : this.sender.address, 
                                  'address2': this.sender.address2, 
                                  'city'    : this.sender.city, 

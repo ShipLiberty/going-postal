@@ -3,12 +3,10 @@
 </div>
 <div id="letter-container" class="ui very padded left aligned container segment">
         <div id="letter-header" class="ui left aligned container ">
-            <p>The Honorable {{representative['firstname']}} {{representative['lastname']}}
-            <br>LONG TITLE
-            <br>ADDRESS LINE 1
-            <br>ADDRESS LINE 2
-            <br>ADDRESS LINE 3<br><br></p>
-            <p>Dear SHORT TITLE {{representative['lastname']}}:<br><br></p>
+            <p>{{representative['prefix']}} {{representative['firstname']}} {{representative['lastname']}}
+            <br>{{representative['address']}}
+            <br>{{representative['city']}}, {{representative['state']}} {{representative['zip']}}<br><br></p>
+            <p>Dear TODO[SHORT TITLE] {{representative['lastname']}}:<br><br></p>
         </div>
         <div class="ui left aligned container"
             [formGroup]="form">
@@ -16,6 +14,7 @@
                 <div class="field">
                     <!-- I'd like to see this auto resize and eliminate the resize handle. -->
                     <textarea id="letter-textarea"
+                              autofocus
                               placeholder="Write your letter here."
                               formControlName="message"></textarea>
                 </div>
@@ -38,8 +37,8 @@
                 <div class="field">
                     <input id="letter-sender-name" 
                         type="text" 
-                        formControlName="name"
-                        name="name" 
+                        formControlName="yourname"
+                        name="yourname"
                         placeholder="Your Name">
                 </div>
             </div>
