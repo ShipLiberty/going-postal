@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css?family=Adamina|Lato:300,400,700,900');
+
+#letterInput
+{
+    height:150px;
+    width:100px;
+    font-size:14pt;
+}
+
+#letter-container
+{
+    font-family: 'Adamina';
+}
+
+#letter-header
+{
+    line-height: 1.75em;
+    color: #808080;
+}
+
+#letter-textarea{  
+    border: none;
+    padding: 0;
+    line-height: 1.75em;
+}
+
+#letter-salutation
+{
+    line-height: 1.75em;
+    color: #808080;
+}
+
+#letter-sender-name
+{
+    border: none;
+    padding: 0;
+    font-family: 'Adamina';
+    line-height: 1.75em;
+}

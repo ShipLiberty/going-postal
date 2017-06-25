@@ -1,8 +1,11 @@
-import { Component, OnInit, Inject, Input, Output, EventEmitter }   from '@angular/core';
+import { ElementRef, Component, OnInit, Inject, Input, Output, EventEmitter, AfterViewInit }   from '@angular/core';
 import { FormGroup, FormControl, Validators }                       from '@angular/forms';
 import { Http, URLSearchParams }                                    from '@angular/http';
 import 'rxjs/add/operator/map';
 import { APP_CONFIG, IAppConfig }                                   from './../app.config';
+
+
+declare var jQuery: any;
 
 @Component({
   selector   : 'search-reps',
@@ -11,20 +14,37 @@ import { APP_CONFIG, IAppConfig }                                   from './../a
                 './../semantic/dist/semantic.min.css']
 })
 
-export class SearchComponent  {
+export class SearchComponent implements AfterViewInit{
     //just some properties
     @Input() reps  : any;
     @Input() sender: any;
     
     @Output() repsChanged  : EventEmitter<any> = new EventEmitter<any>();    
     @Output() senderChanged: EventEmitter<any> = new EventEmitter<any>();    
+    @Output() next: EventEmitter<any> = new EventEmitter<any>();    
 
     isLoading = false;
 
     //called first time before the ngOnInit()    
     constructor(private http: Http, 
+                private elementRef: ElementRef,
                 @Inject(APP_CONFIG) private config: IAppConfig) {}
     
+    ngAfterViewInit() {
+        jQuery(this.elementRef.nativeElement).find('select').dropdown();
+
+        // Workaround for issue https://github.com/angular/angular/issues/6005
+        setTimeout(_=> this.setFormValue());
+    }
+    
+    setFormValue() {
+        this.form.setValue({'street': this.sender['address'] || '',
+                            'city': this.sender['city'] || '',
+                            'state': this.sender['state'] || '',
+                            'zipcode': this.sender['zip'] || ''});
+        jQuery(this.elementRef.nativeElement).find('select').dropdown('set selected', this.form.controls['state'].value);
+    }
+
     //form stuff, includes setting the properties and the validation
     form = new FormGroup({
         street : new FormControl('', Validators.required),
@@ -63,6 +83,7 @@ export class SearchComponent  {
                 //notify app component of changes
                 this.repsChanged.emit(this.reps);
                 this.senderChanged.emit(this.sender);
+                this.next.emit();
         })
     }
     

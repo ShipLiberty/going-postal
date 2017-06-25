@@ -1,0 +1,36 @@
+<div class="ui text left aligned container">
+    <p>Please review your letter to <strong>TODO[SHORT TITLE] {{representative['firstname']}} {{representative['lastname']}}</strong>.</p>
+</div>
+<div class="ui very padded center segment">
+    <div id="letter-container" class="ui left aligned container">
+            <div id="letter-to-block" class="ui left aligned container ">
+                <p>{{representative['prefix']}} {{representative['firstname']}} {{representative['lastname']}}
+                <br>{{representative['address']}}
+                <br>{{representative['city']}}, {{representative['state']}} {{representative['zip']}}<br><br></p>
+                <p>Dear TODO[SHORT TITLE] {{representative['lastname']}}:<br><br></p>
+            </div>
+            <div class="ui left aligned container">
+                <div class="message-block">
+                    <p>{{message}}<br><br><br></p>
+                </div>
+                <div id="sender-block" class="ui"> 
+                    <p>Sincerely,<br><br>
+                    {{sender['name']}}<br>
+                    {{sender['address']}}<br>
+                    <span *ngIf="sender['address2'] != ''">{{sender['address2']}}<br></span>
+                    {{sender['city']}}, {{sender['state']}} {{sender['zip']}}
+                    </p>
+                    <br>
+                </div>
+                <div class="ui center aligned container">
+                    <button class="ui medium button" 
+                                type="submit" 
+                                [disabled]="isSubmitting"
+                                (click)="payAndSubmitLetterAndNext()">Pay Postage and Send
+                    </button>
+                </div>
+            </div>
+    </div>
+    <br>
+    <div id="loader" class="ui inline loader center" [class.active]="isPosting"></div>
+</div>

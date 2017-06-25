@@ -27,6 +27,8 @@ export class AppComponent  {
     
     selectedRep: any = {};
 
+    message = "";
+
     //for showing the correct component using ngSwitch
     currentView: string;
     currentViewNumber = 0;
@@ -37,6 +39,15 @@ export class AppComponent  {
         this.setCurrentView('search');
     }
     
+    nextView() {
+        console.log('in nextView');
+        if (this.currentViewNumber >= this.stages.length) {
+            console.log('No more views!');
+            return;
+        }
+        this.setCurrentView(this.stages[this.currentViewNumber + 1]);
+    }
+
     //this is used to show the correct component using ngSwitch
     // NOTE: This inits the view as the latest view
     setCurrentView(view) {
@@ -52,12 +63,15 @@ export class AppComponent  {
         this.latestViewNumber = Math.max(this.currentViewNumber, this.latestViewNumber);
     }
 
+    onMessageChanged(message_and_name) {
+        this.sender['name'] = message_and_name['name'];
+        this.message = message_and_name['message'];
+    }
+
     //on getting back data from the search component
     onRepsChanged(reps) {
         this.reps = reps;
         //console.log('main app reps: ' + this.reps);
-        
-        this.setCurrentView('select');
     }
     onSenderChanged(sender) {
         this.sender = sender;
@@ -68,8 +82,6 @@ export class AppComponent  {
     onRepSelected(rep) {
         this.selectedRep = rep;
         //console.log('main app selected rep: ' + this.selectedRep);
-        
-        this.setCurrentView('letter');
     }
 }
 

@@ -11,12 +11,14 @@ export class SelectComponent  {
     //just some properties
     @Input() representatives:any;
     
-    @Output() repSelected  : EventEmitter<any> = new EventEmitter<any>();    
+    @Output() next: EventEmitter<any> = new EventEmitter<any>();
+    @Output() repSelected  : EventEmitter<any> = new EventEmitter<any>();
         
     //called when a representative is selected
     onRepClick(rep) {
         //notify app component that a rep was selected
         this.repSelected.emit(rep);
+        this.next.emit();
         //console.log('repSelected: ' + rep.firstname);
     }
 }

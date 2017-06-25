@@ -1,8 +1,6 @@
-import { Component, OnInit, Input, Inject }   from '@angular/core';
+import { Component, OnInit, Input, Output, Inject, EventEmitter, AfterViewInit }   from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Http, Headers, RequestOptions }      from '@angular/http';
 import 'rxjs/add/operator/map';
-import { APP_CONFIG, IAppConfig }             from './../app.config';
 
 @Component({
   selector   : 'letter-input',
@@ -11,17 +9,14 @@ import { APP_CONFIG, IAppConfig }             from './../app.config';
                 './../semantic/dist/semantic.min.css']
 })
 
-export class LetterComponent {
+export class LetterComponent implements AfterViewInit {
 
     //some variables
-    @Input() representative:any;
-    @Input() sender:any;
-    body     : any = {};
-    stripeToken  = '';
-
-    //called first time before the ngOnInit() method gets called    
-    constructor(private http : Http,
-                @Inject(APP_CONFIG) private config: IAppConfig) {}
+    @Input()  representative:any;
+    @Input()  sender:any;
+    @Input()  message:any;
+    @Output() messageChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() next: EventEmitter<any> = new EventEmitter<any>();
 
 
     //form stuff, includes setting the properties and the validation
@@ -31,61 +26,21 @@ export class LetterComponent {
         message  : new FormControl('', Validators.required),
     });
     
-    //function called on submit, send letter to Jesse here.
-    postLetter() {
-           
-        //reference to the component context, so that we can call the other functions   
-        var componentRef = this; // colloquially "that" or "self"
 
-        //stripe handler
-        var handler = (<any>window).StripeCheckout.configure({
-            key: this.config.stripeKey,
-            locale: 'auto',
-            token: function (token: any) {
-                // You can access the token ID with `token.id`.
-                // Get the token ID to your server-side code for use.
-                componentRef.stripeToken = token.id;
-                componentRef.postToJesse();
-            }
-        });
-        
-        handler.open({
-            name: 'Ship Liberty or else',
-            description: 'shipping liberty cause thats good',
-            amount: 200,
-            image: "https://stripe.com/img/documentation/checkout/marketplace.png",
-            locale: 'auto'
-        });
+    ngAfterViewInit() {
+        // Workaround for issue https://github.com/angular/angular/issues/6005
+        setTimeout(_=> this.setFormValue());
     }
     
-    postToJesse () {
-    
-        console.log('the striple token is: ' + this.stripeToken);
-        //make the body object
-        this.body = {'from'   : {'name'    : this.form.value.yourname,
-                                 'address' : this.sender.address, 
-                                 'address2': this.sender.address2, 
-                                 'city'    : this.sender.city, 
-                                 'state'   : this.sender.state, 
-                                 'zip'     : +this.sender.zip},
-                     'to'      : this.representative,
-                     'message' : this.form.value.message,
-                     'stripeToken' : this.stripeToken
-                    };
-        
-        console.log('the JSON version of the body is: \n\n' + JSON.stringify(this.body));
-        
-        //define some headers
-        let headers = new Headers({ 'content-type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });   
-                
-        //POST request to tell Jesse to mail the letter!
-        this.http.post(this.config.apiEndpoint + 'v1/letters', JSON.stringify(this.body), options).subscribe(
-            response => {
-                console.log('\n\n SUCCESS! =D \n\n');
-                console.log(response.json());
-                }
-        );       
-        
+    setFormValue() {
+        this.form.setValue({'yourname': this.sender['name'] || '',
+                            'message': this.message || ''});
+    }
+
+    saveLetterAndNext() {
+        var message_and_name = {'name'    : this.form.value.yourname,
+                                'message' : this.form.value.message}; 
+        this.messageChanged.emit(message_and_name);
+        this.next.emit();
     }
 }

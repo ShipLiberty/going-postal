@@ -7,16 +7,27 @@
                      [reps]="reps"
                      [sender]="sender"
                      (repsChanged)="onRepsChanged($event)"
-                     (senderChanged)="onSenderChanged($event)">
+                     (senderChanged)="onSenderChanged($event)"
+                     (next)="nextView()">
         </search-reps>
         <select-rep *ngSwitchCase="'select'"
                     [representatives]="reps"
-                    (repSelected)="onRepSelected($event)">
+                    (repSelected)="onRepSelected($event)"
+                    (next)="nextView()">
         </select-rep>
         <letter-input *ngSwitchCase="'letter'"
                       [representative]="selectedRep" 
-                      [sender]="sender">
+                      [sender]="sender"
+                      [message]="message"
+                      (messageChanged)="onMessageChanged($event)"
+                      (next)="nextView()">
         </letter-input>
+        <review-and-pay *ngSwitchCase="'pay'"
+                        [representative]="selectedRep"
+                        [sender]="sender"
+                        [message]="message"
+                        (next)="nextView()">
+        </review-and-pay>
     <br>
     <breadcrumbs [activeStage]="currentViewNumber"
                  [latestStage]="latestViewNumber"

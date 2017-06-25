@@ -11,6 +11,7 @@ import { LetterComponent }       from './letter/letter.component';
 import { HeaderComponent }       from './header/header.component';
 import { FooterComponent }       from './footer/footer.component';
 import { BreadcrumbsComponent }  from './breadcrumbs/breadcrumbs.component';
+import { ReviewAndPayComponent }  from './review_and_pay/review_and_pay.component';
 
 import { APP_CONFIG, AppConfig } from './app.config';
 
@@ -28,7 +29,8 @@ import { APP_CONFIG, AppConfig } from './app.config';
     LetterComponent,
     HeaderComponent,
     FooterComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    ReviewAndPayComponent
   ],
   bootstrap: [ 
     AppComponent 

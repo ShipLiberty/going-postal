@@ -1,5 +1,5 @@
 <div class="ui text left aligned container">
-    <p>What would you like to say to {{representative['firstname']}} {{representative['lastname']}}?</p>
+    <p>What would you like to say to <strong>TODO[SHORT TITLE] {{representative['firstname']}} {{representative['lastname']}}</strong>?</p>
 </div>
 <div id="letter-container" class="ui very padded left aligned container segment">
         <div id="letter-header" class="ui left aligned container ">
@@ -30,7 +30,7 @@
                         placeholder="Hi Representative, I would like to let you know how I feel.">
                 </div>
             </div>-->
-            <div id="letter-salutation" class="ui left aligned container ">
+            <div id="letter-salutation" class="ui">
                 <p>Sincerely,<br><br></p>
             </div>
             <div class="ui form">
@@ -42,11 +42,11 @@
                         placeholder="Your Name">
                 </div>
             </div>
-            <div class="ui right aligned container">
+            <div class="ui center aligned container">
                 <button class="ui medium button" 
                             type="submit" 
-                            (click)="postLetter()"
-                            [disabled]="!form.valid">Submit
+                            (click)="saveLetterAndNext()"
+                            [disabled]="!form.valid">Next
                 </button>
             </div>
         </div>
