@@ -1,24 +1,34 @@
 <h1 class="left floated" id="selectTitle">Select a representative to write to:</h1>
-<div class="ui three stackable cards">
-     <div class="card" *ngFor="let representative of representatives">
-        <div class="image">
+<br>
+<div class="ui three stackable cards centered">
+    <div class="card" style="max-width:300px;" *ngFor="let representative of representatives">
+        <div class="content" >
             <img *ngIf="representative['image-url']"
-                 class="ui avatar image" 
+                 class="left floated tiny ui image" 
                  src="http://{{representative['image-url']}}">
-        </div>
-        <div class="content">
-            <span class= "left floated" id="cardRepName">
-                {{representative['firstname']}} {{representative['lastname']}} ({{representative['party']}})
-            </span>
-            <div class="meta">  
-                <span class= "left floated" id="cardRepTitle">
-                    {{representative['rectype']}}
-                </span>
+            
+            <!-- IF WE WANT A PLACEMENT IMAGE -->
+            <img *ngIf="!representative['image-url']"
+                 class="left floated tiny ui image" 
+                 src="images/nateTest.png">
+            
+            <div class="header" id="cardRepName">
+                <a class="header" href="{{representative['home-page']}}" target="_blank">
+                    {{representative['firstname']}} {{representative['lastname']}}
+                </a>
             </div>
-        </div>
-        <div class="ui bottom attached button" (click)="onRepClick(representative)">
-            Select
+            
+            <div class="meta" id="cardRepTitle">
+                <div>{{representative['rectype']}}, ({{representative['party']}})</div>
+            </div>
+            
+            <br>
+            
+            <div class="ui basic green button" (click)="onRepClick(representative)">Select</div>
         </div>
     </div>    
 </div>
+
+
+
    

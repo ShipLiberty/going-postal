@@ -19,6 +19,8 @@ export class SelectComponent  {
         //notify app component that a rep was selected
         this.repSelected.emit(rep);
         this.next.emit();
-        //console.log('repSelected: ' + rep.firstname);
+        
+        //log rep (for debugging)
+        console.log(JSON.stringify(rep, null, 4));
     }
 }
