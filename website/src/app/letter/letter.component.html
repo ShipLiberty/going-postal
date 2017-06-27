@@ -1,12 +1,12 @@
 <div class="ui text left aligned container">
-    <p>What would you like to say to <strong>TODO[SHORT TITLE] {{representative['firstname']}} {{representative['lastname']}}</strong>?</p>
+    <p>What would you like to say to <strong>{{representative['firstname']}} {{representative['lastname']}}</strong>?</p>
 </div>
 <div id="letter-container" class="ui very padded left aligned container segment">
         <div id="letter-header" class="ui left aligned container ">
             <p>{{representative['prefix']}} {{representative['firstname']}} {{representative['lastname']}}
             <br>{{representative['address']}}
             <br>{{representative['city']}}, {{representative['state']}} {{representative['zip']}}<br><br></p>
-            <p>Dear TODO[SHORT TITLE] {{representative['lastname']}}:<br><br></p>
+            <p>Dear {{representative['rectype']}} {{representative['lastname']}}:<br><br></p>
         </div>
         <div class="ui left aligned container"
             [formGroup]="form">
