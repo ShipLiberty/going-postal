@@ -1,0 +1,29 @@
+div#faqs {
+  max-width: 1125px;
+  margin: 0 auto;
+  display: block;
+}
+
+div#faqs div.left-col {
+  float: left;
+  width: 47%;
+}
+
+div#faqs div.right-col {
+  float: right;
+  width: 47%;
+}
+
+div#faqs div.faq p {
+    font-size: 1.2em;
+    line-height: 1.6em;
+}
+
+div#faqs div.faq p.question {
+  margin: 0 0 0.75em 0;
+  font-weight: 700;
+}
+
+div#faqs div.faq p.answer {
+  margin: 0 0 2.5em 0;
+}
