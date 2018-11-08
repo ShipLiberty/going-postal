@@ -50,8 +50,8 @@ export class ReviewAndPayComponent {
             });
             
             handler.open({
-                name: 'Ship Liberty or else',
-                description: 'shipping liberty cause thats good',
+                name: 'Input credit card details',
+                description: 'This covers the cost of printing & shipping',
                 amount: 200,
                 image: "https://stripe.com/img/documentation/checkout/marketplace.png",
                 locale: 'auto'
@@ -90,7 +90,7 @@ export class ReviewAndPayComponent {
                          'stripeToken' : tokenId
                         };
             
-            console.log('the JSON version of the body is: \n\n' + JSON.stringify(this.body));
+            //console.log('the JSON version of the body is: \n\n' + JSON.stringify(this.body));
             
             //define some headers
             let headers = new Headers({ 'content-type': 'application/json' });

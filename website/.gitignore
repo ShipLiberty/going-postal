@@ -10,3 +10,5 @@ src/*.js
 !src/systemjs.*
 src/app/app.environment.ts
 *.log
+semantic.json
+semantic
