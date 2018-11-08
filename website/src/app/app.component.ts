@@ -5,7 +5,8 @@ import { SelectComponent  }  from './select/select.component';
 import { LetterComponent  }  from './letter/letter.component';
 import { FooterComponent  }  from './footer/footer.component';
 import { MissionComponent } from  './mission/mission.component';
-
+import { LandingFAQComponent } from './landing_faq/landing_faq.component';
+ 
 @Component({
   selector   : 'my-app',
   templateUrl: 'app/app.component.html',

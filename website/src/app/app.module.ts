@@ -13,6 +13,7 @@ import { FooterComponent }       from './footer/footer.component';
 import { BreadcrumbsComponent }  from './breadcrumbs/breadcrumbs.component';
 import { ReviewAndPayComponent } from './review_and_pay/review_and_pay.component';
 import { MissionComponent }      from './mission/mission.component';
+import { LandingFAQComponent }   from './landing_faq/landing_faq.component';
 
 import { APP_CONFIG, AppConfig } from './app.config';
 
@@ -32,7 +33,8 @@ import { APP_CONFIG, AppConfig } from './app.config';
     FooterComponent,
     BreadcrumbsComponent,
     ReviewAndPayComponent,
-    MissionComponent
+    MissionComponent,
+    LandingFAQComponent
   ],
   bootstrap: [
     AppComponent
