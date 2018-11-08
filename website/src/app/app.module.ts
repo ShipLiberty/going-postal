@@ -11,18 +11,19 @@ import { LetterComponent }       from './letter/letter.component';
 import { HeaderComponent }       from './header/header.component';
 import { FooterComponent }       from './footer/footer.component';
 import { BreadcrumbsComponent }  from './breadcrumbs/breadcrumbs.component';
-import { ReviewAndPayComponent }  from './review_and_pay/review_and_pay.component';
+import { ReviewAndPayComponent } from './review_and_pay/review_and_pay.component';
+import { MissionComponent }      from './mission/mission.component';
 
 import { APP_CONFIG, AppConfig } from './app.config';
 
 @NgModule({
-  imports: [ 
+  imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpModule,
     FormsModule
   ],
-  declarations: [ 
+  declarations: [
     AppComponent,
     SearchComponent,
     SelectComponent,
@@ -30,10 +31,11 @@ import { APP_CONFIG, AppConfig } from './app.config';
     HeaderComponent,
     FooterComponent,
     BreadcrumbsComponent,
-    ReviewAndPayComponent
+    ReviewAndPayComponent,
+    MissionComponent
   ],
-  bootstrap: [ 
-    AppComponent 
+  bootstrap: [
+    AppComponent
   ],
   providers: [
     { provide: APP_CONFIG, useValue: AppConfig }

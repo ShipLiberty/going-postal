@@ -16,7 +16,7 @@
                     (next)="nextView()">
         </select-rep>
         <letter-input *ngSwitchCase="'letter'"
-                      [representative]="selectedRep" 
+                      [representative]="selectedRep"
                       [sender]="sender"
                       [message]="message"
                       (messageChanged)="onMessageChanged($event)"
@@ -35,5 +35,5 @@
     </breadcrumbs>
     </div>
 </div>
+<mission-statement></mission-statement>
 <site-footer></site-footer>
-

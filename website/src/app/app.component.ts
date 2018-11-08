@@ -1,9 +1,10 @@
-import { Component }        from '@angular/core';
-import { HeaderComponent }  from './header/header.component';
-import { SearchComponent }  from './search/search.component';
-import { SelectComponent }  from './select/select.component';
-import { LetterComponent }  from './letter/letter.component';
-import { FooterComponent }  from './footer/footer.component';
+import { Component }         from '@angular/core';
+import { HeaderComponent  }  from './header/header.component';
+import { SearchComponent  }  from './search/search.component';
+import { SelectComponent  }  from './select/select.component';
+import { LetterComponent  }  from './letter/letter.component';
+import { FooterComponent  }  from './footer/footer.component';
+import { MissionComponent } from  './mission/mission.component';
 
 @Component({
   selector   : 'my-app',
@@ -24,7 +25,7 @@ export class AppComponent  {
     };
 
     stages = ['search', 'select', 'letter', 'pay', 'shipped'];
-    
+
     selectedRep: any = {};
 
     message = "";
@@ -34,11 +35,11 @@ export class AppComponent  {
     currentViewNumber = 0;
     latestViewNumber = 0;
 
-    //called after the constructor and called  after the first ngOnChanges() 
+    //called after the constructor and called  after the first ngOnChanges()
     ngOnInit(){
         this.setCurrentView('search');
     }
-    
+
     nextView() {
         console.log('in nextView');
         if (this.currentViewNumber >= this.stages.length) {
@@ -77,12 +78,10 @@ export class AppComponent  {
         this.sender = sender;
         //console.log('main app sender: '+ this.sender);
     }
-    
+
     //on getting back data from the select component
     onRepSelected(rep) {
         this.selectedRep = rep;
         //console.log('main app selected rep: ' + this.selectedRep);
     }
 }
-
-
