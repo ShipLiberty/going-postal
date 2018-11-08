@@ -1,0 +1,25 @@
+#mission {
+  background: rgb(218,44,56);
+  background: linear-gradient(90deg, rgba(218,44,56,1) 25%, rgba(8,57,84,1) 64%);
+  /* gradient notes:
+  easy website: cssgradiant.io
+  red  - #da2c38
+  blue - #083954
+  */
+  margin-top: 40px;
+  height: auto;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+div {
+
+}
+
+h2 {
+  line-height: 1.6;
+  margin-bottom: 40px;
+  margin-top: 40px;
+  text-align: center;
+  color: #fff;
+}
