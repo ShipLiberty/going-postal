@@ -24,3 +24,8 @@
 #cardRepTitle:first-letter{
   text-transform: capitalize
 }
+
+#nextButton {
+    background-color: #DA2C38;
+    color: white;
+}

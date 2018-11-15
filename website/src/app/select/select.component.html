@@ -1,34 +1,41 @@
 <h1 class="left floated" id="selectTitle">Select a representative to write to:</h1>
 <br>
 <div class="ui three stackable cards centered">
-    <div class="card" style="max-width:300px;" *ngFor="let representative of representatives">
+    <div class="card" style="max-width:300px;" *ngFor="let representative of representatives; let i = index">
         <div class="content" >
             <img *ngIf="representative['image-url']"
-                 class="left floated tiny ui image" 
+                 class="left floated tiny ui image"
                  src="http://{{representative['image-url']}}">
-            
+
             <!-- IF WE WANT A PLACEMENT IMAGE -->
             <img *ngIf="!representative['image-url']"
-                 class="left floated tiny ui image" 
+                 class="left floated tiny ui image"
                  src="images/nateTest.png">
-            
+
             <div class="header" id="cardRepName">
                 <a class="header" href="{{representative['home-page']}}" target="_blank">
                     {{representative['firstname']}} {{representative['lastname']}}
                 </a>
             </div>
-            
+
             <div class="meta" id="cardRepTitle">
                 <div>{{representative['rectype']}}, ({{representative['party']}})</div>
             </div>
-            
+
             <br>
-            
-            <div class="ui basic green button" (click)="onRepClick(representative)">Select</div>
+
+            <div (click)="onRepClick(representative, i)"
+                 [ngClass]="getButtonClasses(i)">{{getText(i)}}
+            </div>
         </div>
-    </div>    
+    </div>
 </div>
-
-
-
-   
+<br>
+<div class="ui center aligned container">
+    <button class="ui medium button"
+            id="nextButton"
+            type="submit"
+            [disabled]="checkSelectedReps()"
+            (click)="onNextClick()">Next
+    </button>
+</div>
