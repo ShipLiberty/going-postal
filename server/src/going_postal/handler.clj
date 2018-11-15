@@ -38,7 +38,7 @@
 (def app
   (-> (routes home-routes app-routes)
       (mywrap-request-logging)
-      (wrap-cors :access-control-allow-origin [#"http://localhost:3000"]
+      (wrap-cors :access-control-allow-origin [#"http://localhost:3000" #"http://localhost:3001"]
                  :access-control-allow-methods [:get :post])
       (handler/site)
       (wrap-base-url)))

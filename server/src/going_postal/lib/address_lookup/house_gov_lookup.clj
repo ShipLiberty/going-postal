@@ -40,9 +40,9 @@
         (map ret-attrs))))
 
 (defn extract-by-zip-url [page]
+  ;; NOTE: this maps to the page layout, and may need to be changed if the page changes..
   (let [frm (-> (s/select (s/child
-                            (s/id "navFind")
-                            (s/tag :form))
+                            (s/id "findrep"))
                           page)
                 first)]
     (conj (vec (do-extract-form-params frm)) page)))
