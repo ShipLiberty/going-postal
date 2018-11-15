@@ -6,7 +6,7 @@ import { LetterComponent  }  from './letter/letter.component';
 import { FooterComponent  }  from './footer/footer.component';
 import { MissionComponent } from  './mission/mission.component';
 import { LandingFAQComponent } from './landing_faq/landing_faq.component';
- 
+
 @Component({
   selector   : 'my-app',
   templateUrl: 'app/app.component.html',
@@ -27,7 +27,7 @@ export class AppComponent  {
 
     stages = ['search', 'select', 'letter', 'pay', 'shipped'];
 
-    selectedRep: any = {};
+    selectedReps: any = [];
 
     message = "";
 
@@ -81,8 +81,8 @@ export class AppComponent  {
     }
 
     //on getting back data from the select component
-    onRepSelected(rep) {
-        this.selectedRep = rep;
-        //console.log('main app selected rep: ' + this.selectedRep);
+    onRepsSelected(reps) {
+        this.selectedReps = reps;
+        console.log('main app selected reps: ' + this.selectedReps);
     }
 }

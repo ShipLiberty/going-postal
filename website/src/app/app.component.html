@@ -12,7 +12,7 @@
         </search-reps>
         <select-rep *ngSwitchCase="'select'"
                     [representatives]="reps"
-                    (repSelected)="onRepSelected($event)"
+                    (selectedRepresentatives)="onRepsSelected($event)"
                     (next)="nextView()">
         </select-rep>
         <letter-input *ngSwitchCase="'letter'"

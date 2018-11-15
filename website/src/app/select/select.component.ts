@@ -91,10 +91,9 @@ export class SelectComponent  {
     }
 
     //called when the next button is clicked
-    onNextClick(reps) {
-      console.log("next button clicked");
+    onNextClick() {
       //notify app component that a rep was selected
-      this.selectedRepresentatives.emit(reps);
+      this.selectedRepresentatives.emit(this.selectedReps);
       this.next.emit();
     }
 
