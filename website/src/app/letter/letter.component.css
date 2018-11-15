@@ -12,14 +12,18 @@
     font-family: 'Adamina';
 }
 
+#rep-name {
+  text-transform: capitalize
+}
+
 #letter-header
 {
     line-height: 1.75em;
     color: #808080;
 }
 
-#letter-textarea 
-{  
+#letter-textarea
+{
     border: none;
     padding: 0;
     line-height: 1.75em;

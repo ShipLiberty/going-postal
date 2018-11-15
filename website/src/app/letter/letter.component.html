@@ -6,11 +6,11 @@
             <p>{{representative['prefix']}} {{representative['firstname']}} {{representative['lastname']}}
             <br>{{representative['address']}}
             <br>{{representative['city']}}, {{representative['state']}} {{representative['zip']}}<br><br></p>
-            <p>Dear {{representative['rectype']}} {{representative['lastname']}}:<br><br></p>
+            <p id="rep-name">Dear {{representative['rectype']}} {{representative['lastname']}}:<br><br></p>
         </div>
         <div class="ui left aligned container"
             [formGroup]="form">
-            <div class="ui form">  
+            <div class="ui form">
                 <div class="field">
                     <!-- I'd like to see this auto resize and eliminate the resize handle. -->
                     <textarea id="letter-textarea"
@@ -18,14 +18,14 @@
                               placeholder="Write your letter here."
                               formControlName="message"></textarea>
                 </div>
-            </div>   
-        <!--<div class="ui form">  
+            </div>
+        <!--<div class="ui form">
                 <div class="field">
-                    <input 
+                    <input
                         type="text"
-                        id="letterInput" 
+                        id="letterInput"
                         formControlName="message"
-                        name="message" 
+                        name="message"
                         [(ngModel)]="message"
                         placeholder="Hi Representative, I would like to let you know how I feel.">
                 </div>
@@ -35,16 +35,16 @@
             </div>
             <div class="ui form">
                 <div class="field">
-                    <input id="letter-sender-name" 
-                        type="text" 
+                    <input id="letter-sender-name"
+                        type="text"
                         formControlName="yourname"
                         name="yourname"
                         placeholder="Your Name">
                 </div>
             </div>
             <div class="ui center aligned container">
-                <button class="ui medium button" 
-                            type="submit" 
+                <button class="ui medium button"
+                            type="submit"
                             (click)="saveLetterAndNext()"
                             [disabled]="!form.valid">Next
                 </button>
