@@ -12,12 +12,12 @@ import 'rxjs/add/operator/map';
 export class LetterComponent implements AfterViewInit {
 
     //some variables
-    @Input()  representative:any;
+    @Input()  selectedReps:any;
     @Input()  sender:any;
     @Input()  message:any;
+
     @Output() messageChanged: EventEmitter<any> = new EventEmitter<any>();
     @Output() next: EventEmitter<any> = new EventEmitter<any>();
-
 
     //form stuff, includes setting the properties and the validation
     //NOTE: defines name and message (used below in post fn)
@@ -25,13 +25,13 @@ export class LetterComponent implements AfterViewInit {
         yourname : new FormControl('', Validators.required),
         message  : new FormControl('', Validators.required),
     });
-    
+
 
     ngAfterViewInit() {
         // Workaround for issue https://github.com/angular/angular/issues/6005
         setTimeout(_=> this.setFormValue());
     }
-    
+
     setFormValue() {
         this.form.setValue({'yourname': this.sender['name'] || '',
                             'message': this.message || ''});
@@ -39,7 +39,7 @@ export class LetterComponent implements AfterViewInit {
 
     saveLetterAndNext() {
         var message_and_name = {'name'    : this.form.value.yourname,
-                                'message' : this.form.value.message}; 
+                                'message' : this.form.value.message};
         this.messageChanged.emit(message_and_name);
         this.next.emit();
     }

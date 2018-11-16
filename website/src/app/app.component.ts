@@ -83,6 +83,6 @@ export class AppComponent  {
     //on getting back data from the select component
     onRepsSelected(reps) {
         this.selectedReps = reps;
-        console.log('main app selected reps: ' + this.selectedReps);
+        //console.log('main app selected reps: ' + this.selectedReps);
     }
 }
