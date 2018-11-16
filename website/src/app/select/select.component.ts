@@ -10,7 +10,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class SelectComponent  {
     //just some properties
     @Input() representatives:any; //represnetatives that are shown, input from the search component
-    selectedReps: Array<Custom> = [];
+    selectedReps: any = [];
 
     @Output() selectedRepresentatives: EventEmitter<any> = new EventEmitter<any>();
     @Output() next: EventEmitter<any> = new EventEmitter<any>();

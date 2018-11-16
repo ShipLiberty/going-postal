@@ -1,53 +1,52 @@
 <div class="ui text left aligned container">
-    <p>What would you like to say to <strong>{{selectedReps[0]['firstname']}} {{selectedReps[0]['lastname']}}</strong>?</p>
+    <p>What would you like to say to:</p>
 </div>
-<div id="letter-container" class="ui very padded left aligned container segment">
-        <div id="letter-header" class="ui left aligned container ">
-            <p>{{selectedReps[0]['prefix']}} {{selectedReps[0]['firstname']}} {{selectedReps[0]['lastname']}}
-            <br>{{selectedReps[0]['address']}}
-            <br>{{selectedReps[0]['city']}}, {{selectedReps[0]['state']}} {{selectedReps[0]['zip']}}<br><br></p>
-            <p id="rep-name">Dear {{selectedReps[0]['rectype']}} {{selectedReps[0]['lastname']}}:<br><br></p>
-        </div>
-        <div class="ui left aligned container"
-            [formGroup]="form">
-            <div class="ui form">
-                <div class="field">
-                    <!-- I'd like to see this auto resize and eliminate the resize handle. -->
-                    <textarea id="letter-textarea"
-                              autofocus
-                              placeholder="Write your letter here."
-                              formControlName="message"></textarea>
-                </div>
-            </div>
-        <!--<div class="ui form">
-                <div class="field">
-                    <input
-                        type="text"
-                        id="letterInput"
-                        formControlName="message"
-                        name="message"
-                        [(ngModel)]="message"
-                        placeholder="Hi Representative, I would like to let you know how I feel.">
-                </div>
-            </div>-->
-            <div id="letter-salutation" class="ui">
-                <p>Sincerely,<br><br></p>
-            </div>
-            <div class="ui form">
-                <div class="field">
-                    <input id="letter-sender-name"
-                        type="text"
-                        formControlName="yourname"
-                        name="yourname"
-                        placeholder="Your Name">
-                </div>
-            </div>
-            <div class="ui center aligned container">
-                <button class="ui medium button"
-                            type="submit"
-                            (click)="saveLetterAndNext()"
-                            [disabled]="!form.valid">Next
-                </button>
-            </div>
-        </div>
+
+<div class="ui top attached tabular menu">
+  <a *ngFor="let rep of selectedReps; let i = index" [ngClass]="getTabHeaderClass(i)" [attr.data-tab]="i">{{rep['firstname']}} {{rep['lastname']}}</a>
+</div>
+
+
+<div *ngFor="let rep of selectedReps; let i = index" [ngClass]="getTabBottomClass(i)" [attr.data-tab]="i">
+  <div id="letter-container" class="ui very padded left aligned container segment">
+          <div id="letter-header" class="ui left aligned container ">
+              <p>{{rep['prefix']}} {{rep['firstname']}} {{rep['lastname']}}
+              <br>{{rep['address']}}
+              <br>{{rep['city']}}, {{rep['state']}} {{rep['zip']}}<br><br></p>
+              <p id="rep-name">Dear {{rep['rectype']}} {{rep['lastname']}}:<br><br></p>
+          </div>
+          <div class="ui left aligned container"
+              [formGroup]="form">
+              <div class="ui form">
+                  <div class="field">
+                      <!-- I'd like to see this auto resize and eliminate the resize handle. -->
+                      <textarea id="letter-textarea"
+                                autofocus
+                                placeholder="Write your letter here."
+                                formControlName="message"></textarea>
+                  </div>
+              </div>
+              <div id="letter-salutation" class="ui">
+                  <p>Sincerely,<br><br></p>
+              </div>
+              <div class="ui form">
+                  <div class="field">
+                      <input id="letter-sender-name"
+                          type="text"
+                          formControlName="yourname"
+                          name="yourname"
+                          placeholder="Your Name">
+                  </div>
+              </div>
+          </div>
+  </div>
+</div>
+
+<div class="ui center aligned container">
+    <button class="ui medium button"
+               id="next-button"
+             type="submit"
+          (click)="saveLetterAndNext()"
+       [disabled]="!form.valid">Next
+    </button>
 </div>

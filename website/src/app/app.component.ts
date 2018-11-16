@@ -42,7 +42,7 @@ export class AppComponent  {
     }
 
     nextView() {
-        console.log('in nextView');
+        //console.log('in nextView');
         if (this.currentViewNumber >= this.stages.length) {
             console.log('No more views!');
             return;

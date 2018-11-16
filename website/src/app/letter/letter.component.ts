@@ -26,10 +26,12 @@ export class LetterComponent implements AfterViewInit {
         message  : new FormControl('', Validators.required),
     });
 
-
     ngAfterViewInit() {
         // Workaround for issue https://github.com/angular/angular/issues/6005
         setTimeout(_=> this.setFormValue());
+        $('.menu .item').tab({'onVisible':function(){
+          //this gets called when switching between tabs/representatives
+        }});
     }
 
     setFormValue() {
@@ -42,5 +44,22 @@ export class LetterComponent implements AfterViewInit {
                                 'message' : this.form.value.message};
         this.messageChanged.emit(message_and_name);
         this.next.emit();
+    }
+
+    //helper function to determine tab header class -- just makes first tab active on load
+    getTabHeaderClass(index) {
+      if (index == 0) {
+        return "item active";
+      } else {
+        return "item";
+      }
+    }
+    //helper function to determine tab sections class -- just makes first section active on load
+    getTabBottomClass(index) {
+      if (index == 0) {
+        return "ui bottom attached tab segment active";
+      } else {
+        return "ui bottom attached tab segment";
+      }
     }
 }
