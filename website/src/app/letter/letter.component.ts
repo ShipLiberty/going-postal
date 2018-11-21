@@ -35,22 +35,17 @@ export class LetterComponent implements AfterViewInit {
         // Workaround for issue https://github.com/angular/angular/issues/6005
         setTimeout(_=> this.setFormValue());
         setTimeout(_=> this.areLettersWritten(), 500);
-
+        //this doesn't work in there yet...
         const self = this;
-        //console.log("this: " + JSON.stringify(this, null, 4));
-        //console.log("self: " + JSON.stringify(self, null, 4));
         //for the tabs to work
         //ASK JESSE about this and why it works after original start comment
         $('.menu .item').tab({'onVisible':function(argumentOne){
           //this gets called when switching between tabs/representatives
-          console.log(typeof argumentOne);
           self.visibleTab = parseInt(argumentOne);
-          console.log("tab was changed: " + this.visibleTab);
         }});
         //set up the array of letters (dictionaries) to send over
         this.filledLetters = []; //ASK JESSE, not sure why the array is starting with 2 null objects...
         //console.log("array length before: " + this.filledLetters.length);
-        console.log("tab is: " + this.visibleTab);
         for (var i = 0; i < this.selectedReps.length; i++) {
           var dict = {};
           dict.name = "";
@@ -78,15 +73,16 @@ export class LetterComponent implements AfterViewInit {
       //var shouldWeShowTheNextButton = 0;
       this.hideNextButton = false;
       for (var i = 0; i < this.filledLetters.length; i++) {
+        console.log("Index: " + i + "\nVisible Tab: " + this.visibleTab);
         if (i === this.visibleTab) {
-          console.log("tab: " + this.visibleTab);
           this.filledLetters[i].message = this.form.value.message;
           this.filledLetters[i].name = this.form.value.yourname;
+          console.log("if statement is hitting....name: " + this.form.value.yourname);
         }
 
         //check that all the letters have a name and a message for the button
         if (this.filledLetters[i].message == "") {
-          console.log("hitting message true " + JSON.stringify(this.filledLetters, null, 4));
+          console.log("hitting message true");
           this.hideNextButton = true;
         }
         if (this.filledLetters[i].name == "") {
@@ -94,6 +90,8 @@ export class LetterComponent implements AfterViewInit {
           this.hideNextButton = true;
         }
       }
+
+      console.log(JSON.stringify(this.filledLetters, null, 4));
     }
 
     //helper function to determine if the next button should be enabled/disabled
