@@ -19,6 +19,9 @@ export class LetterComponent implements AfterViewInit {
     @Output() messageChanged: EventEmitter<any> = new EventEmitter<any>();
     @Output() next: EventEmitter<any> = new EventEmitter<any>();
 
+    filledLetters: any = [];
+    hideNextButton = true;
+
     //form stuff, includes setting the properties and the validation
     //NOTE: defines name and message (used below in post fn)
     form = new FormGroup({
@@ -26,12 +29,36 @@ export class LetterComponent implements AfterViewInit {
         message  : new FormControl('', Validators.required),
     });
 
+    visibleTab: number = 0;
+
     ngAfterViewInit() {
         // Workaround for issue https://github.com/angular/angular/issues/6005
         setTimeout(_=> this.setFormValue());
-        $('.menu .item').tab({'onVisible':function(){
+        setTimeout(_=> this.areLettersWritten(), 500);
+
+        const self = this;
+        //console.log("this: " + JSON.stringify(this, null, 4));
+        //console.log("self: " + JSON.stringify(self, null, 4));
+        //for the tabs to work
+        //ASK JESSE about this and why it works after original start comment
+        $('.menu .item').tab({'onVisible':function(argumentOne){
           //this gets called when switching between tabs/representatives
+          console.log(typeof argumentOne);
+          self.visibleTab = parseInt(argumentOne);
+          console.log("tab was changed: " + this.visibleTab);
         }});
+        //set up the array of letters (dictionaries) to send over
+        this.filledLetters = []; //ASK JESSE, not sure why the array is starting with 2 null objects...
+        //console.log("array length before: " + this.filledLetters.length);
+        console.log("tab is: " + this.visibleTab);
+        for (var i = 0; i < this.selectedReps.length; i++) {
+          var dict = {};
+          dict.name = "";
+          dict.message = "";
+          dict.representative = this.selectedReps[i];
+          this.filledLetters.push(dict);
+        }
+        //console.log("letters: " + JSON.stringify(this.filledLetters, null, 4));
     }
 
     setFormValue() {
@@ -46,6 +73,34 @@ export class LetterComponent implements AfterViewInit {
         this.next.emit();
     }
 
+    letterChange() {
+      //console.log("form message: " + this.form.value.message);
+      //var shouldWeShowTheNextButton = 0;
+      this.hideNextButton = false;
+      for (var i = 0; i < this.filledLetters.length; i++) {
+        if (i === this.visibleTab) {
+          console.log("tab: " + this.visibleTab);
+          this.filledLetters[i].message = this.form.value.message;
+          this.filledLetters[i].name = this.form.value.yourname;
+        }
+
+        //check that all the letters have a name and a message for the button
+        if (this.filledLetters[i].message == "") {
+          console.log("hitting message true " + JSON.stringify(this.filledLetters, null, 4));
+          this.hideNextButton = true;
+        }
+        if (this.filledLetters[i].name == "") {
+          console.log("hitting name true");
+          this.hideNextButton = true;
+        }
+      }
+    }
+
+    //helper function to determine if the next button should be enabled/disabled
+    areLettersWritten() {
+      return this.hideNextButton;
+    }
+
     //helper function to determine tab header class -- just makes first tab active on load
     getTabHeaderClass(index) {
       if (index == 0) {
@@ -54,6 +109,7 @@ export class LetterComponent implements AfterViewInit {
         return "item";
       }
     }
+
     //helper function to determine tab sections class -- just makes first section active on load
     getTabBottomClass(index) {
       if (index == 0) {
