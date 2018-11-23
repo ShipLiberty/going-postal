@@ -18,14 +18,12 @@
         <letter-input *ngSwitchCase="'letter'"
                       [selectedReps]="selectedReps"
                       [sender]="sender"
-                      [message]="message"
-                      (messageChanged)="onMessageChanged($event)"
+                      (lettersFilled)="onLettersFilled($event)"
                       (next)="nextView()">
         </letter-input>
         <review-and-pay *ngSwitchCase="'pay'"
-                        [representative]="selectedRep"
+                        [filledLetters]="filledLetters"
                         [sender]="sender"
-                        [message]="message"
                         (next)="nextView()">
         </review-and-pay>
     <br>

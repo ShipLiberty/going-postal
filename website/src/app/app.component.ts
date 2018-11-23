@@ -29,7 +29,7 @@ export class AppComponent  {
 
     selectedReps: any = [];
 
-    message = "";
+    filledLetters: any = [];
 
     //for showing the correct component using ngSwitch
     currentView: string;
@@ -65,9 +65,9 @@ export class AppComponent  {
         this.latestViewNumber = Math.max(this.currentViewNumber, this.latestViewNumber);
     }
 
-    onMessageChanged(message_and_name) {
-        this.sender['name'] = message_and_name['name'];
-        this.message = message_and_name['message'];
+    onLettersFilled(filledLetters) {
+      console.log("app componenet ts hits: " + filledLetters);
+        this.filledLetters = filledLetters;
     }
 
     //on getting back data from the search component

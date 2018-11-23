@@ -16,7 +16,7 @@ export class LetterComponent implements AfterViewInit {
     @Input()  sender:any;
     @Input()  message:any;
 
-    @Output() messageChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() lettersFilled: EventEmitter<any> = new EventEmitter<any>();
     @Output() next: EventEmitter<any> = new EventEmitter<any>();
 
     filledLetters: any = [];
@@ -62,36 +62,27 @@ export class LetterComponent implements AfterViewInit {
     }
 
     saveLetterAndNext() {
-        var message_and_name = {'name'    : this.form.value.yourname,
-                                'message' : this.form.value.message};
-        this.messageChanged.emit(message_and_name);
+        console.log("this is what is emitted: " + this.filledLetters);
+        this.lettersFilled.emit(this.filledLetters);
         this.next.emit();
     }
 
     letterChange() {
-      //console.log("form message: " + this.form.value.message);
-      //var shouldWeShowTheNextButton = 0;
       this.hideNextButton = false;
       for (var i = 0; i < this.filledLetters.length; i++) {
-        console.log("Index: " + i + "\nVisible Tab: " + this.visibleTab);
         if (i === this.visibleTab) {
           this.filledLetters[i].message = this.form.value.message;
           this.filledLetters[i].name = this.form.value.yourname;
-          console.log("if statement is hitting....name: " + this.form.value.yourname);
         }
 
-        //check that all the letters have a name and a message for the button
+        //check that all the letters have a name and a message for enabling/disabling next button
         if (this.filledLetters[i].message == "") {
-          console.log("hitting message true");
           this.hideNextButton = true;
         }
         if (this.filledLetters[i].name == "") {
-          console.log("hitting name true");
           this.hideNextButton = true;
         }
       }
-
-      console.log(JSON.stringify(this.filledLetters, null, 4));
     }
 
     //helper function to determine if the next button should be enabled/disabled

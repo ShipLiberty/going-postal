@@ -13,23 +13,22 @@ import { APP_CONFIG, IAppConfig }             from './../app.config';
 export class ReviewAndPayComponent {
 
     //some variables
-    @Input() representative:any;
     @Input() sender:any;
-    @Input() message:string;
-    @Output() next: EventEmitter<any> = new EventEmitter<any>();    
+    @Input() filledLetters:any;
+    @Output() next: EventEmitter<any> = new EventEmitter<any>();
 
     body: any;
 
     isSubmitting = false;
     isPosting = false;
-    //called first time before the ngOnInit() method gets called    
+    //called first time before the ngOnInit() method gets called
     constructor(private http : Http,
                 @Inject(APP_CONFIG) private config: IAppConfig) {}
 
 
     openStripeHandler() {
         var p = new Promise((resolve, reject) => {
-        
+
             var isResolved = false;
             //stripe handler
             var handler = (<any>window).StripeCheckout.configure({
@@ -48,7 +47,7 @@ export class ReviewAndPayComponent {
                     }
                 }
             });
-            
+
             handler.open({
                 name: 'Input credit card details',
                 description: 'This covers the cost of printing & shipping',
@@ -78,24 +77,22 @@ export class ReviewAndPayComponent {
                 this.isSubmitting = false
             });
     }
-    
+
     postLetter(tokenId) {
-    
+
         var p = new Promise((resolve, reject) => {
             console.log('the striple token is: ' + tokenId);
             //make the body object
             this.body = {'from'   : this.sender,
-                         'to'      : this.representative,
-                         'message' : this.message,
-                         'stripeToken' : tokenId
-                        };
-            
+                         'letters'      : this.filledLetters,
+                         'stripeToken' : tokenId};
+
             //console.log('the JSON version of the body is: \n\n' + JSON.stringify(this.body));
-            
+
             //define some headers
             let headers = new Headers({ 'content-type': 'application/json' });
-            let options = new RequestOptions({ headers: headers });   
-                    
+            let options = new RequestOptions({ headers: headers });
+
             //POST request to tell Jesse to mail the letter!
             this.http.post(this.config.apiEndpoint + 'v1/letters', JSON.stringify(this.body), options).subscribe(
                 response => {
@@ -103,13 +100,12 @@ export class ReviewAndPayComponent {
                     console.log(response.json());
                     resolve(response);
                     }
-            );       
+            );
         });
-        return p;        
+        return p;
     }
 
     handleLetterResponseAndNext(response) {
         this.next.emit();
     }
 }
-
