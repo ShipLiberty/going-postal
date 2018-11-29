@@ -35,7 +35,7 @@
         (do
           (println "ERROR" letters)
           (json-response (map :error letters) 400))
-        (-> (update req :response-data merge resp)
+        (-> (update req :response-data assoc :letters resp)
             nxt)
         ))))
 
