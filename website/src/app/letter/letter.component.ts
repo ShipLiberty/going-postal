@@ -69,12 +69,14 @@ export class LetterComponent implements AfterViewInit {
     }
 
     letterChange() {
+      console.log("hits");
       this.hideNextButton = false;
       for (var i = 0; i < this.filledLetters.length; i++) {
         if (i === this.visibleTab) {
           this.filledLetters[i].message = this.form.value.message;
-          this.filledLetters[i].name = this.form.value.yourname;
         }
+        this.filledLetters[i].name = this.form.value.yourname;
+
 
         //check that all the letters have a name and a message for enabling/disabling next button
         if (this.filledLetters[i].message == "") {

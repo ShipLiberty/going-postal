@@ -23,7 +23,8 @@
                     autofocus
                     placeholder="Write your letter here."
                     formControlName="message"
-                    (change)="letterChange()">
+                    (change)="letterChange()"
+                    (keyup)="letterChange()">
           </textarea>
         </div>
       </div>
@@ -38,6 +39,7 @@
               formControlName="yourname"
               name="yourname"
               (change)="letterChange()"
+              (keyup)="letterChange()"
               placeholder="Your Name">
         </div>
       </div>
