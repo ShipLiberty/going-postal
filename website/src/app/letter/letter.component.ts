@@ -43,6 +43,11 @@ export class LetterComponent implements AfterViewInit {
           //this gets called when switching between tabs/representatives
           self.visibleTab = parseInt(argumentOne);
         }});
+        //copys the name to all letters no matter where you change it.
+        $('.copyText').on('keyup change paste', function(e){
+          $('.copyText').val($(this).val())
+        });
+
         //set up the array of letters (dictionaries) to send over
         for (var i = 0; i < this.selectedReps.length; i++) {
           var dict = {};
