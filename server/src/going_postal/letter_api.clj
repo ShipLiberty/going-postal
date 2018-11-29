@@ -43,20 +43,21 @@
   (let [turl (io/resource "letter_template.html")]
     (slurp turl)))
 
-(defn handle-post-letter [{{:keys [from to message]} :body}]
+(defn handle-post-letter [{{:keys [from letters]} :body}]
   (let [today (. (java.text.SimpleDateFormat. "MMMM d, YYYY")
                  format (java.util.Date.))
-        salutation (str
-                     (-> to
-                       :rectype
-                       honorific)
-                     " "
-                     (:lastname to))
-        signature (:name from)
-        content (->Content today salutation message signature)]
-    (println "sending: " (make-address-from-from-args from) (make-address-from-contact-record to) content)
-    (l/send-letter @client
-                   (make-address-from-from-args from)
-                   (make-address-from-contact-record to)
-                   (template)
-                   content)))
+        signature (:name from)]
+    (for [{message :message to :representative} letters]
+      (let [salutation (str
+                         (-> to
+                             :rectype
+                             honorific)
+                         " "
+                         (:lastname to))
+            content (->Content today salutation message signature)]
+        (println "sending: " (make-address-from-from-args from) (make-address-from-contact-record to) content)
+        (l/send-letter @client
+                       (make-address-from-from-args from)
+                       (make-address-from-contact-record to)
+                       (template)
+                       content)))))
