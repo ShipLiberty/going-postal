@@ -1,36 +1,35 @@
 <div class="ui text left aligned container">
-    <p>Please review your letter to <strong>{{filledLetters[0].representative['firstname']}} {{filledLetters[0].representative['lastname']}}</strong>.</p>
+    <p>Please review your letter<span *ngIf="filledLetters.length > 1">s</span> to <span *ngFor="let letter of filledLetters; let i = index"><strong>{{letter.representative['firstname']}} {{letter.representative['lastname']}}</strong><span *ngIf="i < filledLetters.length - 1"> and </span></span>.</p>
 </div>
-<div class="ui very padded center segment">
+<div class="ui very padded center segment" *ngFor="let letter of filledLetters; let i = index">
     <div id="letter-container" class="ui left aligned container">
             <div id="letter-to-block" class="ui left aligned container ">
-                <p>{{filledLetters[0].representative['prefix']}} {{representative['firstname']}} {{filledLetters[0].representative['lastname']}}
-                <br>{{filledLetters[0].representative['address']}}
-                <br>{{filledLetters[0].representative['city']}}, {{filledLetters[0].representative['state']}} {{filledLetters[0].representative['zip']}}<br><br></p>
-                <p>Dear {{filledLetters[0].representative['rectype']}} {{filledLetters[0].representative['lastname']}}:<br><br></p>
+                <p>{{letter.representative['prefix']}} {{letter.representative['firstname']}} {{letter.representative['lastname']}}
+                <br>{{letter.representative['address']}}
+                <br>{{letter.representative['city']}}, {{letter.representative['state']}} {{letter.representative['zip']}}<br><br></p>
+                <p>Dear {{letter.representative['rectype']}} {{letter.representative['lastname']}}:<br><br></p>
             </div>
             <div class="ui left aligned container">
                 <div class="message-block">
-                    <p>{{filledLetters[0].message}}<br><br><br></p>
+                    <p>{{letter.message}}<br><br><br></p>
                 </div>
                 <div id="sender-block" class="ui">
                     <p>Sincerely,<br><br>
-                    {{filledLetters[0].name}}<br>
+                    {{letter.name}}<br>
                     {{sender['address']}}<br>
                     <span *ngIf="sender['address2'] != ''">{{sender['address2']}}<br></span>
                     {{sender['city']}}, {{sender['state']}} {{sender['zip']}}
                     </p>
-                    <br>
-                </div>
-                <div class="ui center aligned container">
-                    <button class="ui medium button"
-                                type="submit"
-                                [disabled]="isSubmitting"
-                                (click)="payAndSubmitLetterAndNext()">Pay Postage and Send
-                    </button>
                 </div>
             </div>
     </div>
-    <br>
     <div id="loader" class="ui inline loader center" [class.active]="isPosting"></div>
+</div>
+<br>
+<div class="ui center aligned container">
+    <button class="ui medium button"
+                type="submit"
+                [disabled]="isSubmitting"
+                (click)="payAndSubmitLetterAndNext()">Pay Postage and Send
+    </button>
 </div>

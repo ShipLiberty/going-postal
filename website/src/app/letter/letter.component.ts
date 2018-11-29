@@ -82,7 +82,11 @@ export class LetterComponent implements AfterViewInit {
         if (this.filledLetters[i].name == "") {
           this.hideNextButton = true;
         }
+        //console.log(this.filledLetters[i].name);
       }
+      //console.log("letters: " + JSON.stringify(this.filledLetters, null, 4));
+      //console.log("message: " + this.form.value.message);
+      //console.log("name: " + this.form.value.yourname);
     }
 
     //helper function to determine if the next button should be enabled/disabled
