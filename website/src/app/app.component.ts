@@ -66,7 +66,6 @@ export class AppComponent  {
     }
 
     onLettersFilled(filledLetters) {
-      console.log("app componenet ts hits: " + filledLetters);
         this.filledLetters = filledLetters;
     }
 
