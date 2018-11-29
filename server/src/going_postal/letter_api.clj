@@ -55,7 +55,7 @@
                          " "
                          (:lastname to))
             content (->Content today salutation message signature)]
-        (println "sending: " (make-address-from-from-args from) (make-address-from-contact-record to) content)
+        (println "sending: " (make-address-from-from-args from) (make-address-from-contact-record to) (template) content)
         (l/send-letter @client
                        (make-address-from-from-args from)
                        (make-address-from-contact-record to)

@@ -29,9 +29,12 @@
 (defn post-letter-middleware [nxt]
   (fn [req]
     (println "in post-letter-middleware")
-    (let [{:keys [error] :as resp} (le/handle-post-letter req)]
-      (if error
-        (json-response error 400)
+    (let [letters (le/handle-post-letter req)
+          ]
+      (if (some :error letters)
+        (do
+          (println "ERROR" letters)
+          (json-response (map :error letters) 400))
         (-> (update req :response-data merge resp)
             nxt)
         ))))
