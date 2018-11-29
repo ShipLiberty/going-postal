@@ -12,3 +12,4 @@ src/app/app.environment.ts
 *.log
 semantic.json
 semantic
+*.swp

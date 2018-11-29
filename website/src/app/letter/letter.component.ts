@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, Inject, EventEmitter, AfterViewInit }   from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import 'rxjs/add/operator/map';
+declare var $:any;
 
 @Component({
   selector   : 'letter-input',
@@ -48,9 +49,9 @@ export class LetterComponent implements AfterViewInit {
         //console.log("array length before: " + this.filledLetters.length);
         for (var i = 0; i < this.selectedReps.length; i++) {
           var dict = {};
-          dict.name = "";
-          dict.message = "";
-          dict.representative = this.selectedReps[i];
+          dict['name'] = "";
+          dict['message'] = "";
+          dict['representative'] = this.selectedReps[i];
           this.filledLetters.push(dict);
         }
         //console.log("letters: " + JSON.stringify(this.filledLetters, null, 4));
