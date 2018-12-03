@@ -16,6 +16,7 @@ export class ReviewAndPayComponent {
     @Input() sender:any;
     @Input() filledLetters:any;
     @Output() next: EventEmitter<any> = new EventEmitter<any>();
+    @Output() lettersSent: EventEmitter<any> = new EventEmitter<any>();
 
     body: any;
 
@@ -96,6 +97,7 @@ export class ReviewAndPayComponent {
             this.http.post(this.config.apiEndpoint + 'v1/letters', JSON.stringify(this.body), options).subscribe(
                 response => {
                     //console.log(response.json());
+                    this.lettersSent.emit(response.json());
                     resolve(response);
                     }
             );

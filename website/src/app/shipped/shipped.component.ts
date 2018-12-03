@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector   : 'shipped-congrats',
@@ -8,5 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class ShippedComponent  {
+
+  @Input()  sentLetters:any;
+
+  ngAfterViewInit() {
+    console.log('shipped: ' + JSON.stringify(this.sentLetters, null, 4));
+  }
 
 }
