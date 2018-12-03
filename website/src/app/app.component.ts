@@ -6,6 +6,7 @@ import { LetterComponent  }  from './letter/letter.component';
 import { FooterComponent  }  from './footer/footer.component';
 import { MissionComponent } from  './mission/mission.component';
 import { LandingFAQComponent } from './landing_faq/landing_faq.component';
+import { ShippedComponent }  from './shipped/shipped.component';
 
 @Component({
   selector   : 'my-app',

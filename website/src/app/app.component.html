@@ -26,6 +26,8 @@
                         [sender]="sender"
                         (next)="nextView()">
         </review-and-pay>
+        <shipped-congrats *ngSwitchCase="'shipped'">
+        </shipped-congrats>
     <br>
     <breadcrumbs [activeStage]="currentViewNumber"
                  [latestStage]="latestViewNumber"
