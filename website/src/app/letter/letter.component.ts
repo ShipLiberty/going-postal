@@ -69,7 +69,6 @@ export class LetterComponent implements AfterViewInit {
     }
 
     letterChange() {
-      console.log("hits");
       this.hideNextButton = false;
       for (var i = 0; i < this.filledLetters.length; i++) {
         if (i === this.visibleTab) {
