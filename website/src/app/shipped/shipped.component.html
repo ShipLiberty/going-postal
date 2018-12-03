@@ -1,1 +1,9 @@
-<h1>Huzzah!</h1>
+<h3>Congratulations!</h3>
+<p>Your letters are currently being printed, stamped and mailed.</p>
+<br />
+<div class="centered" *ngFor="let letter of sentLetters">
+  <span>
+    <img class="ui medium image" src="{{letter['thumbnails'][0]['medium']}}">
+    <a href="{{letter['url']}}">tracking code: {{letter['id']}}</a>
+  </span>
+<div>

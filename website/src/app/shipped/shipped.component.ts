@@ -11,6 +11,7 @@ export class ShippedComponent  {
 
   @Input()  sentLetters:any;
 
+
   ngAfterViewInit() {
     console.log('shipped: ' + JSON.stringify(this.sentLetters, null, 4));
   }

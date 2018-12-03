@@ -32,7 +32,7 @@ export class AppComponent  {
 
     filledLetters: any = [];
 
-    sentLetters: any = {};
+    sentLetters: any = [];
 
     //for showing the correct component using ngSwitch
     currentView: string;
@@ -93,6 +93,6 @@ export class AppComponent  {
 
     //once you pay this is the data from the backend of the letters sent
     onLettersPaidAndShipped(lettersSent) {
-      this.sentLetters = lettersSent;
+      this.sentLetters = lettersSent['letters'];
     }
 }
