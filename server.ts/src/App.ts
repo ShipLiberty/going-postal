@@ -27,6 +27,18 @@ class App {
             const {from, letters, stripeToken} = req.body;
             letter.sendLetters(from, letters, stripeToken).then(data => res.json(data));
         });
+
+        router.get('/v1/track-letter', (req, res) => {
+            // '/v1/track-letter?letter-id=1234
+            const letterId = req.query['letter-id']
+            if (!letterId) {
+                // panic
+            } else {
+                const asyncTI = letter.getTrackingInfo(letterId)
+                asyncTI.then(data => res.json(data))
+            }
+
+        })
         this.express.use('/', router);
     }
 }
