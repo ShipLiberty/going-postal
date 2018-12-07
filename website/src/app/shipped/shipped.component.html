@@ -1,5 +1,5 @@
 <h3>Congratulations!</h3>
-<p>Your letters are currently being printed, stamped and mailed.</p>
+<p>Your letter<span *ngIf="sentLetters.length > 1">s are</span><span *ngIf="sentLetters.length < 2"> is</span> currently being printed, stamped and mailed.</p>
 <br />
 <div class="centered" *ngFor="let letter of sentLetters">
   <span>
