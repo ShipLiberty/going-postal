@@ -3,6 +3,7 @@ import { BrowserModule }         from '@angular/platform-browser';
 import { ReactiveFormsModule }   from '@angular/forms';
 import { HttpModule }            from '@angular/http';
 import { FormsModule }           from '@angular/forms';
+import { RouterModule }          from '@angular/router';
 
 import { AppComponent }          from './app.component';
 import { SearchComponent }       from './search/search.component';
@@ -15,6 +16,8 @@ import { ReviewAndPayComponent } from './review_and_pay/review_and_pay.component
 import { MissionComponent }      from './mission/mission.component';
 import { LandingFAQComponent }   from './landing_faq/landing_faq.component';
 import { ShippedComponent }      from './shipped/shipped.component';
+import { TrackComponent }        from './track/track.component';
+import { MainComponent }         from './main/main.component';
 
 import { APP_CONFIG, AppConfig } from './app.config';
 
@@ -23,7 +26,12 @@ import { APP_CONFIG, AppConfig } from './app.config';
     BrowserModule,
     ReactiveFormsModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot([
+      {path : '', component : MainComponent},
+      {path : 'track', component : TrackComponent},
+      {path : '**', component : AppComponent} //change to some kind of 404
+    ])
   ],
   declarations: [
     AppComponent,
@@ -36,7 +44,9 @@ import { APP_CONFIG, AppConfig } from './app.config';
     ReviewAndPayComponent,
     MissionComponent,
     LandingFAQComponent,
-    ShippedComponent
+    ShippedComponent,
+    TrackComponent,
+    MainComponent
   ],
   bootstrap: [
     AppComponent

@@ -1,42 +1,5 @@
 <site-header></site-header>
-<div class="Site-content" [ngSwitch]="currentView">
-    <div class="ui container center aligned">
-        <br>
-        <br>
-        <search-reps *ngSwitchCase="'search'"
-                     [reps]="reps"
-                     [sender]="sender"
-                     (repsChanged)="onRepsChanged($event)"
-                     (senderChanged)="onSenderChanged($event)"
-                     (next)="nextView()">
-        </search-reps>
-        <select-rep *ngSwitchCase="'select'"
-                    [representatives]="reps"
-                    (selectedRepresentatives)="onRepsSelected($event)"
-                    (next)="nextView()">
-        </select-rep>
-        <letter-input *ngSwitchCase="'letter'"
-                      [selectedReps]="selectedReps"
-                      [sender]="sender"
-                      (lettersFilled)="onLettersFilled($event)"
-                      (next)="nextView()">
-        </letter-input>
-        <review-and-pay *ngSwitchCase="'pay'"
-                        [filledLetters]="filledLetters"
-                        [sender]="sender"
-                        (lettersSent)="onLettersPaidAndShipped($event)"
-                        (next)="nextView()">
-        </review-and-pay>
-        <shipped-congrats *ngSwitchCase="'shipped'"
-                          [sentLetters]="sentLetters">>
-        </shipped-congrats>
-    <br>
-    <breadcrumbs [activeStage]="currentViewNumber"
-                 [latestStage]="latestViewNumber"
-                 (stageClicked)="switchCurrentView($event)">
-    </breadcrumbs>
-    </div>
-</div>
+<router-outlet></router-outlet>
 <mission-statement></mission-statement>
 <br>
 <landing-faq></landing-faq>

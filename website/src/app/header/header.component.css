@@ -1,10 +1,21 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:900');
 
 #header {
-    color: #083954;
-    font-family: 'Lato';
-    font-size: 20pt;
-    font-weight: 900;
     border-bottom: 1px solid #CECDB7;
     padding: .5em;
+}
+
+a {
+  padding-right: 15px;
+}
+
+a.logo {
+  color: #083954;
+  font-family: 'Lato';
+  font-size: 20pt;
+  font-weight: 900;
+}
+
+a.active {
+  color: #083954;
 }
