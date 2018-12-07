@@ -1,8 +1,8 @@
 import { Component }         from '@angular/core';
-import { SearchComponent  }  from './search/search.component';
-import { SelectComponent  }  from './select/select.component';
-import { LetterComponent  }  from './letter/letter.component';
-import { ShippedComponent }  from './shipped/shipped.component';
+import { SearchComponent  }  from '../search/search.component';
+import { SelectComponent  }  from '../select/select.component';
+import { LetterComponent  }  from '../letter/letter.component';
+import { ShippedComponent }  from '../shipped/shipped.component';
 
 @Component({
   selector   : 'main-app',
