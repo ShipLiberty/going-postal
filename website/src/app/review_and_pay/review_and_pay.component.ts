@@ -16,6 +16,7 @@ export class ReviewAndPayComponent {
     @Input() sender:any;
     @Input() filledLetters:any;
     @Output() next: EventEmitter<any> = new EventEmitter<any>();
+    @Output() lettersSent: EventEmitter<any> = new EventEmitter<any>();
 
     body: any;
 
@@ -42,7 +43,6 @@ export class ReviewAndPayComponent {
                 },
                 closed: function() {
                     if (!isResolved) {
-                        console.log('closed called!');
                         reject(null);
                     }
                 }
@@ -81,11 +81,10 @@ export class ReviewAndPayComponent {
     postLetter(tokenId) {
 
         var p = new Promise((resolve, reject) => {
-            console.log('the striple token is: ' + tokenId);
             //make the body object
-            this.sender['name'] = 'George';
-            this.body = {'from'   : this.sender,
-                         'letters'      : this.filledLetters,
+            this.sender['name'] = this.filledLetters[0]['name'];
+            this.body = {'from'        : this.sender,
+                         'letters'     : this.filledLetters,
                          'stripeToken' : tokenId};
 
             //console.log('the JSON version of the body is: \n\n' + JSON.stringify(this.body));
@@ -97,8 +96,8 @@ export class ReviewAndPayComponent {
             //POST request to tell Jesse to mail the letter!
             this.http.post(this.config.apiEndpoint + 'v1/letters', JSON.stringify(this.body), options).subscribe(
                 response => {
-                    console.log('\n\n SUCCESS! =D \n\n');
-                    console.log(response.json());
+                    //console.log(response.json());
+                    this.lettersSent.emit(response.json());
                     resolve(response);
                     }
             );

@@ -6,6 +6,7 @@ import { LetterComponent  }  from './letter/letter.component';
 import { FooterComponent  }  from './footer/footer.component';
 import { MissionComponent } from  './mission/mission.component';
 import { LandingFAQComponent } from './landing_faq/landing_faq.component';
+import { ShippedComponent }  from './shipped/shipped.component';
 
 @Component({
   selector   : 'my-app',
@@ -30,6 +31,8 @@ export class AppComponent  {
     selectedReps: any = [];
 
     filledLetters: any = [];
+
+    sentLetters: any = [];
 
     //for showing the correct component using ngSwitch
     currentView: string;
@@ -65,24 +68,31 @@ export class AppComponent  {
         this.latestViewNumber = Math.max(this.currentViewNumber, this.latestViewNumber);
     }
 
-    onLettersFilled(filledLetters) {
-      console.log("app componenet ts hits: " + filledLetters);
-        this.filledLetters = filledLetters;
+    //after pressing next on the search component/before seeing the reps that come up
+    onSenderChanged(sender) {
+      this.sender = sender;
+      //console.log('main app sender: '+ this.sender);
     }
 
-    //on getting back data from the search component
+    //after getting back data from the search query from backend
     onRepsChanged(reps) {
-        this.reps = reps;
-        //console.log('main app reps: ' + this.reps);
-    }
-    onSenderChanged(sender) {
-        this.sender = sender;
-        //console.log('main app sender: '+ this.sender);
+      this.reps = reps;
+      //console.log('main app reps: ' + this.reps);
     }
 
     //on getting back data from the select component
     onRepsSelected(reps) {
         this.selectedReps = reps;
         //console.log('main app selected reps: ' + this.selectedReps);
+    }
+
+    //on getting back data from the filled letters page (going to the pay and review page)
+    onLettersFilled(filledLetters) {
+        this.filledLetters = filledLetters;
+    }
+
+    //once you pay this is the data from the backend of the letters sent
+    onLettersPaidAndShipped(lettersSent) {
+      this.sentLetters = lettersSent['letters'];
     }
 }

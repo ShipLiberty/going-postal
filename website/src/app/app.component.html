@@ -24,8 +24,12 @@
         <review-and-pay *ngSwitchCase="'pay'"
                         [filledLetters]="filledLetters"
                         [sender]="sender"
+                        (lettersSent)="onLettersPaidAndShipped($event)"
                         (next)="nextView()">
         </review-and-pay>
+        <shipped-congrats *ngSwitchCase="'shipped'"
+                          [sentLetters]="sentLetters">>
+        </shipped-congrats>
     <br>
     <breadcrumbs [activeStage]="currentViewNumber"
                  [latestStage]="latestViewNumber"

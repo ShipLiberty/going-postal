@@ -18,25 +18,25 @@ export class SearchComponent implements AfterViewInit{
     //just some properties
     @Input() reps  : any;
     @Input() sender: any;
-    
-    @Output() repsChanged  : EventEmitter<any> = new EventEmitter<any>();    
-    @Output() senderChanged: EventEmitter<any> = new EventEmitter<any>();    
-    @Output() next: EventEmitter<any> = new EventEmitter<any>();    
+
+    @Output() repsChanged  : EventEmitter<any> = new EventEmitter<any>();
+    @Output() senderChanged: EventEmitter<any> = new EventEmitter<any>();
+    @Output() next: EventEmitter<any> = new EventEmitter<any>();
 
     isLoading = false;
 
-    //called first time before the ngOnInit()    
-    constructor(private http: Http, 
+    //called first time before the ngOnInit()
+    constructor(private http: Http,
                 private elementRef: ElementRef,
                 @Inject(APP_CONFIG) private config: IAppConfig) {}
-    
+
     ngAfterViewInit() {
         jQuery(this.elementRef.nativeElement).find('select').dropdown();
 
         // Workaround for issue https://github.com/angular/angular/issues/6005
         setTimeout(_=> this.setFormValue());
     }
-    
+
     setFormValue() {
         this.form.setValue({'street': this.sender['address'] || '',
                             'city': this.sender['city'] || '',
@@ -58,14 +58,14 @@ export class SearchComponent implements AfterViewInit{
 
     //function called on (form) submit
     onSubmit() {
-    
+
         this.isLoading = true;
         //set the sender object details
         this.sender.address = this.form.controls['street'].value;
         this.sender.city    = this.form.controls['city'].value;
         this.sender.state   = this.form.controls['state'].value;
         this.sender.zip     = this.form.controls['zipcode'].value;
-        
+
         //lookup GET request endpoint string buildup
         var address = 'address=' + encodeURIComponent(this.sender.address);
         var city    = '&city='    + encodeURIComponent(this.sender.city);
@@ -74,25 +74,24 @@ export class SearchComponent implements AfterViewInit{
 
         var getString = this.config.apiEndpoint + 'v1/lookup?' + address + city + state + zip;
 
-        console.log(getString);
         //GET request for the representatives
         this.http.get(getString).subscribe(response => {
                 //FIXME: handle errors!
                 this.reps = response.json();
                 //console.log('reps from the search component:' + this.reps);
-                
+
                 //notify app component of changes
                 this.repsChanged.emit(this.reps);
                 this.senderChanged.emit(this.sender);
                 this.next.emit();
         })
     }
-    
+
     /* for later semantic dropdown
                         <div class="four wide field">
                         <label>State</label>
                         <div class="ui selection dropdown" (click)="dropdownClick()">
-                            <input type="hidden" 
+                            <input type="hidden"
                                    name="state"
                                    formControlName="state"
                                    id="state1">

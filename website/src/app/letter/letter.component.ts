@@ -39,14 +39,16 @@ export class LetterComponent implements AfterViewInit {
         //this doesn't work in there yet...
         const self = this;
         //for the tabs to work
-        //ASK JESSE about this and why it works after original start comment
         $('.menu .item').tab({'onVisible':function(argumentOne){
           //this gets called when switching between tabs/representatives
           self.visibleTab = parseInt(argumentOne);
         }});
+        //copys the name to all letters no matter where you change it.
+        $('.copyText').on('keyup change paste', function(e){
+          $('.copyText').val($(this).val())
+        });
+
         //set up the array of letters (dictionaries) to send over
-        this.filledLetters = []; //ASK JESSE, not sure why the array is starting with 2 null objects...
-        //console.log("array length before: " + this.filledLetters.length);
         for (var i = 0; i < this.selectedReps.length; i++) {
           var dict = {};
           dict['name'] = "";
@@ -54,7 +56,6 @@ export class LetterComponent implements AfterViewInit {
           dict['representative'] = this.selectedReps[i];
           this.filledLetters.push(dict);
         }
-        //console.log("letters: " + JSON.stringify(this.filledLetters, null, 4));
     }
 
     setFormValue() {
@@ -63,7 +64,6 @@ export class LetterComponent implements AfterViewInit {
     }
 
     saveLetterAndNext() {
-        console.log("this is what is emitted: " + this.filledLetters);
         this.lettersFilled.emit(this.filledLetters);
         this.next.emit();
     }
@@ -73,8 +73,9 @@ export class LetterComponent implements AfterViewInit {
       for (var i = 0; i < this.filledLetters.length; i++) {
         if (i === this.visibleTab) {
           this.filledLetters[i].message = this.form.value.message;
-          this.filledLetters[i].name = this.form.value.yourname;
         }
+        this.filledLetters[i].name = this.form.value.yourname;
+
 
         //check that all the letters have a name and a message for enabling/disabling next button
         if (this.filledLetters[i].message == "") {
@@ -83,11 +84,7 @@ export class LetterComponent implements AfterViewInit {
         if (this.filledLetters[i].name == "") {
           this.hideNextButton = true;
         }
-        //console.log(this.filledLetters[i].name);
       }
-      //console.log("letters: " + JSON.stringify(this.filledLetters, null, 4));
-      //console.log("message: " + this.form.value.message);
-      //console.log("name: " + this.form.value.yourname);
     }
 
     //helper function to determine if the next button should be enabled/disabled
